@@ -1,0 +1,6 @@
+{
+  "name": "Rumos Seguros - Antes de Investir Dinheiro, Aprenda Isso",
+  "description": "Página oficial do livro de Rosario Paulino pela Rumos Seguros: Um guia prático para organizar as finanças, proteger o patrimônio contra golpes e começar a investir com segurança em Moçambique.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
