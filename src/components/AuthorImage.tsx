@@ -7,9 +7,14 @@ interface AuthorImageProps {
 export const AuthorImage: React.FC<AuthorImageProps> = ({ className = '' }) => {
   return (
     <div className={`relative overflow-hidden rounded-2xl shadow-2xl ${className}`}>
-      {/* High-res corporate portrait matching Rosario Paulino in executive suit & desk */}
+      {/* Supports local image /rosario-paulino.jpg if present, otherwise fallback */}
       <img
-        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=85"
+        src="/rosario-paulino.jpg"
+        onError={(e) => {
+          // Fallback to stock executive portrait if custom image is not yet uploaded
+          (e.currentTarget as HTMLImageElement).src =
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=85';
+        }}
         alt="Rosario Paulino - Fundador da Rumos Seguros e Autor"
         className="w-full h-full object-cover object-center"
         referrerPolicy="no-referrer"
