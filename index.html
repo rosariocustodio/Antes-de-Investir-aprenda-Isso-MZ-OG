@@ -1,21 +1,101 @@
-<!doctype html>
-<html lang="pt">
+<!DOCTYPE html>
+<html lang="pt-MZ">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rumos Seguros - Antes de Investir Dinheiro, Aprenda Isso | Rosario Paulino</title>
-    <meta name="description" content="Página oficial do livro de Rosario Paulino pela Rumos Seguros: Um guia prático para organizar as finanças, proteger o patrimônio contra golpes e começar a investir com segurança em Moçambique." />
-    <meta property="og:title" content="Rumos Seguros - Antes de Investir Dinheiro, Aprenda Isso | Rosario Paulino" />
-    <meta property="og:description" content="Página oficial do livro de Rosario Paulino pela Rumos Seguros: Um guia prático para organizar as finanças, proteger o patrimônio contra golpes e começar a investir com segurança em Moçambique." />
+    <title>Rumos Seguros - Antes de Investir, Aprenda Isto | Rosario Paulino</title>
+    <meta name="description" content="Página oficial do livro de Rosario Paulino pela Rumos Seguros: Um guia prático para organizar as finanças, proteger o património contra esquemas e começar a investir com segurança em Moçambique." />
+    
+    <!-- Open Graph / Meta -->
+    <meta property="og:title" content="Rumos Seguros - Antes de Investir, Aprenda Isto | Rosario Paulino" />
+    <meta property="og:description" content="Guia prático para proteger o dinheiro que já tem e aprender a fazê-lo crescer com segurança em Moçambique." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Preload Critical Images for Instant Loading -->
+    <link rel="preload" as="image" href="/ebook-hero.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/ebook-pricing-mockup.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/imagem3.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/imagem1.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/imagem2.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/moderno-autor.webp" type="image/webp" />
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function() {
+        var host = window.location.hostname;
+        if (host.includes('aistudio.google.com')) {
+          return;
+        }
+
+        try {
+          var urlParams = new URLSearchParams(window.location.search);
+          var fbclid = urlParams.get('fbclid');
+          if (fbclid) {
+            var fbcValue = 'fb.1.' + Date.now() + '.' + fbclid;
+            var maxAge = 60 * 60 * 24 * 90;
+            document.cookie = '_fbc=' + encodeURIComponent(fbcValue) + ';path=/;max-age=' + maxAge + ';SameSite=Lax';
+            try { sessionStorage.setItem('meta_fbclid', fbclid); } catch(e) {}
+          }
+        } catch (e) {}
+
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        window.__initialPageViewId = 'PageView_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+        fbq('init', '1433052258793282');
+        fbq('track', 'PageView', {}, { eventID: window.__initialPageViewId });
+      })();
+    </script>
+    <!-- Proteção contra Gravação de Ecrã (Screen Recording / WebRTC / Extensões) -->
+    <script>
+      try {
+        if (navigator.mediaDevices) {
+          navigator.mediaDevices.getDisplayMedia = function() {
+            return Promise.reject(new DOMException("Gravação de ecrã não permitida por direitos de autor da Rumos Seguros.", "NotAllowedError"));
+          };
+        }
+      } catch (e) {}
+    </script>
+
+    <!-- Proteção contra cópia, arrastar e inspeção -->
+    <style>
+      *, *::before, *::after {
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+      }
+      img {
+        -webkit-user-drag: none !important;
+        user-drag: none !important;
+      }
+    </style>
   </head>
-  <body class="bg-[#360A2F] text-[#F6F1EA] antialiased selection:bg-[#F6CE44]/30 selection:text-white">
+  <body 
+    class="bg-[#2C0A29] text-[#F8F4EE] antialiased selection:bg-transparent"
+    oncontextmenu="return false;"
+    onselectstart="return false;"
+    ondragstart="return false;"
+  >
+    <!-- Meta Pixel NoScript Fallback -->
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1433052258793282&ev=PageView&noscript=1"
+      alt="Meta Pixel"
+    /></noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

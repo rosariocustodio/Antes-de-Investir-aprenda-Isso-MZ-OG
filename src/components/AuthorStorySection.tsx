@@ -1,65 +1,91 @@
 import React from 'react';
-import { AuthorImage } from './AuthorImage';
+import { CHECKOUT_URL } from '../config/checkout';
 
 interface AuthorStorySectionProps {
-  onOrderClick: () => void;
+  onOrderClick: (e?: React.MouseEvent) => void;
 }
 
 export const AuthorStorySection: React.FC<AuthorStorySectionProps> = ({ onOrderClick }) => {
   return (
-    <section id="autor" className="py-12 sm:py-16 md:py-24 bg-[#FDF5F2] text-[#0E0E0D] px-4 sm:px-6 lg:px-8 xl:px-12 border-b border-[#E4DAD9]">
-      <div className="max-w-[1240px] mx-auto">
+    <section className="pt-10 pb-12 sm:pt-14 sm:pb-16 bg-[#FDF5F2] text-[#0E0E0D] px-5 sm:px-8 lg:px-12">
+      <div className="max-w-[760px] mx-auto text-left">
         
-        {/* Header Title */}
-        <div className="text-center max-w-[800px] mx-auto mb-8 sm:mb-12 md:mb-16">
-          <p className="font-content font-bold text-[11px] sm:text-[12px] md:text-[13px] tracking-[1.8px] uppercase text-[#360A2F] mb-2 sm:mb-3">
-            Conheça Rosario Paulino
-          </p>
-          <h2 className="font-headline font-normal text-[#360A2F] text-[26px] sm:text-[34px] md:text-[40px] lg:text-[44px] leading-[1.18] tracking-tight">
-            Fundador da Rumos Seguros • Educador Financeiro
-          </h2>
+        {/* Subtle top divider with diamond symbol exactly matching Screenshot 3 & 4 */}
+        <div className="flex items-center justify-center gap-3 mb-8 sm:mb-10 opacity-70">
+          <div className="h-[1px] w-24 sm:w-36 bg-[#360A2F]/25" />
+          <div className="w-1.5 h-1.5 rotate-45 bg-[#360A2F]/60" />
+          <div className="h-[1px] w-24 sm:w-36 bg-[#360A2F]/25" />
         </div>
 
-        {/* 2-Column Responsive Layout for Desktop & Tablet */}
-        <div className="grid grid-cols-1 md:grid-cols-12 items-center gap-8 sm:gap-10 md:gap-10 lg:gap-14 xl:gap-16 mb-8 sm:mb-12">
-          
-          {/* Left Column: Author Image with balanced aspect ratio */}
-          <div className="md:col-span-5 flex justify-center w-full">
-            <div className="w-full max-w-[380px] md:max-w-none overflow-hidden shadow-lg bg-[#E4DAD9]">
-              <AuthorImage className="w-full h-[320px] sm:h-[400px] md:h-[480px] lg:h-[520px] object-cover" />
-            </div>
+        {/* Section Header */}
+        <div className="text-center mb-6 sm:mb-8">
+          <p className="font-content font-medium text-[11px] sm:text-[12px] tracking-[0.22em] uppercase text-[#360A2F] mb-1.5">
+            CONHEÇA O AUTOR
+          </p>
+          <h2 className="font-headline font-normal text-[#360A2F] text-[34px] sm:text-[42px] leading-tight tracking-tight">
+            Rosario Paulino
+          </h2>
+          <p className="font-content text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-[#360A2F]/75 font-medium mt-1">
+            FUNDADOR DA RUMOS SEGUROS • EDUCADOR FINANCEIRO
+          </p>
+        </div>
+
+        {/* Author Photo with caption bar matching Screenshot 4 */}
+        <div className="w-full max-w-[420px] mx-auto overflow-hidden shadow-md border border-[#360A2F]/15 mb-6">
+          <picture className="w-full block bg-[#E4DAD9]">
+            <source srcSet="/moderno-autor.webp" type="image/webp" />
+            <img
+              src="/moderno-autor.jpg"
+              alt="Rosario Paulino - Autor e Fundador da Rumos Seguros"
+              className="w-full h-auto object-contain block select-none"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+            />
+          </picture>
+          <div className="bg-[#2C0A29] py-2.5 px-4 text-center">
+            <p className="font-content text-[11px] font-semibold tracking-[0.2em] uppercase text-white/95">
+              ROSARIO PAULINO
+            </p>
+            <p className="font-content text-[10px] text-white/70 tracking-wide mt-0.5">
+              Autor &amp; Fundador • Rumos Seguros
+            </p>
+          </div>
+        </div>
+
+        {/* Story Text matching Screenshot 4 & 5 word for word */}
+        <div className="space-y-4 text-[#242B2E] font-content text-[15px] sm:text-[16px] leading-[1.7] max-w-[620px] mx-auto pt-2">
+          <p>
+            Durante anos, acompanhei de perto uma realidade dolorosa em Moçambique: trabalhadores dedicados e famílias esforçadas que passam o mês a produzir, apenas para ver o salário desaparecer antes do dia 20.
+          </p>
+
+          <p>
+            A verdade é que ninguém nos ensina nas escolas o essencial sobre o dinheiro: como proteger os rendimentos contra imprevistos, estancar perdas invisíveis e investir com segurança através dos canais formais e regulados da nossa economia.
+          </p>
+
+          <p>
+            Por isso fundei a <strong>Rumos Seguros</strong>. Criei um método 100% prático, realista e desenhado para a realidade moçambicana, para que nenhum trabalhador volte a perder a tranquilidade por falta de orientação financeira.
+          </p>
+
+          {/* Standout Quote Box matching Screenshot 5 */}
+          <div className="my-6 p-5 sm:p-6 bg-[#F5ECE8] border-l-2 border-[#360A2F]">
+            <p className="font-headline italic text-[16px] sm:text-[17px] text-[#2C0A29] leading-relaxed">
+              "Este livro é o mapa prático que eu gostaria de ter recebido: direto ao ponto, sem promessas ilusórias, feito para devolver a sua paz e liberdade de escolha."
+            </p>
           </div>
 
-          {/* Right Column: Story Text */}
-          <div className="md:col-span-7 flex flex-col items-start text-left w-full space-y-4 sm:space-y-5 text-[#242B2E] font-content text-[14px] sm:text-[15px] md:text-[16px] leading-[1.65]">
-            <p>
-              Durante anos acompanhei de perto profissionais talentosos em Moçambique a trabalharem 12 a 14 horas diárias, acumulando rendimento com enorme esforço, mas vivendo numa ansiedade silenciosa sobre a durabilidade desse dinheiro e com medo constante de cometer um erro irreparável.
-            </p>
-
-            <p>
-              Quando presenciei pessoas queridas a perderem as suas poupanças de anos em fraudes ou investimentos impulsivos, percebi que a falta de um método claro e seguro de educação financeira é a maior causa de frustração. Ganhar dinheiro sem saber protegê-lo não traz paz.
-            </p>
-
-            <p>
-              Tomei a decisão de estruturar os princípios reais de organização, proteção contra golpes e investimento inteligente adaptados à nossa realidade em Moçambique. O objetivo não foi apenas ensinar finanças, mas devolver às pessoas a capacidade de fazerem escolhas por clareza e autonomia, e não por medo ou obrigação.
-            </p>
-
-            <p className="font-headline italic text-[16px] sm:text-[18px] md:text-[20px] text-[#360A2F] pt-2 border-l-2 border-[#360A2F] pl-4 leading-relaxed">
-              "Este livro nasceu para ser o guia prático que eu gostaria de ter tido no início: direto ao ponto, honesto e focado na sua segurança."
-            </p>
-
-            {/* CTA Button */}
-            <div className="pt-4 w-full sm:w-auto">
-              <button
-                type="button"
-                onClick={onOrderClick}
-                className="font-button font-semibold text-[12px] sm:text-[13px] md:text-[14px] text-[#360A2F] tracking-[1.5px] sm:tracking-[2px] uppercase bg-transparent border-2 border-[#360A2F] rounded-none px-6 sm:px-8 py-3.5 sm:py-4 w-full sm:w-auto inline-block text-center transition-colors duration-200 hover:bg-[#360A2F] hover:text-white cursor-pointer"
-              >
-                ADQUIRIR O LIVRO COMPLETO • 397 MT
-              </button>
-            </div>
+          {/* Button matching Screenshot 5 */}
+          <div className="w-full flex justify-center pt-2 pb-4">
+            <a
+              href={CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onOrderClick}
+              className="w-full max-w-[340px] min-h-[48px] font-button font-medium text-[12px] sm:text-[12.5px] text-[#2C0A29] tracking-[0.18em] uppercase bg-transparent border border-[#2C0A29] rounded-none py-3.5 inline-flex items-center justify-center transition-all duration-200 hover:bg-[#2C0A29] hover:text-white cursor-pointer shadow-sm active:scale-[0.99]"
+            >
+              QUERO O MEU EXEMPLAR
+            </a>
           </div>
-
         </div>
 
       </div>

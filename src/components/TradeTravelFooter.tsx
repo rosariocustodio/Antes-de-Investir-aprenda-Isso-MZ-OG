@@ -1,165 +1,66 @@
-import React, { useState } from 'react';
-import { CheckCircle2, Loader2, Send } from 'lucide-react';
+import React from 'react';
+import { RumosSegurosLogo } from './RumosSegurosLogo';
 import { BookMockup } from './BookMockup';
+import { CHECKOUT_URL } from '../config/checkout';
 
 interface TradeTravelFooterProps {
-  onOrderClick: () => void;
+  onOrderClick: (e?: React.MouseEvent) => void;
 }
 
 export const TradeTravelFooter: React.FC<TradeTravelFooterProps> = ({ onOrderClick }) => {
-  const [contactValue, setContactValue] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSent, setIsSent] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!contactValue.trim()) return;
-
-    setIsSubmitting(true);
-    setErrorMessage('');
-
-    try {
-      // Disparo direto e seguro para rosariocustodio006@gmail.com usando FormSubmit
-      const response = await fetch('https://formsubmit.co/ajax/rosariocustodio006@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          _subject: 'Novo Interesse no Livro: Antes de Investir Dinheiro, Aprenda Isso',
-          contacto_cliente: contactValue.trim(),
-          origem: 'Formulário do Rodapé da Landing Page',
-          data_envio: new Date().toLocaleString('pt-PT', { timeZone: 'Africa/Maputo' }),
-        }),
-      });
-
-      if (response.ok) {
-        setIsSent(true);
-        // Após confirmação, abre a modal de pagamento ou reserva
-        setTimeout(() => {
-          onOrderClick();
-        }, 1200);
-      } else {
-        // Fallback gracioso caso haja bloqueio de adblocker
-        setIsSent(true);
-        setTimeout(() => {
-          onOrderClick();
-        }, 800);
-      }
-    } catch {
-      // Se houver falha de rede/bloqueador, confirma o interesse e abre a modal de encomenda
-      setIsSent(true);
-      setTimeout(() => {
-        onOrderClick();
-      }, 800);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
-    <footer className="bg-[#360A2F] text-[#F6F1EA] pt-12 sm:pt-16 md:pt-24 pb-12 px-4 sm:px-6 lg:px-8 xl:px-12 border-t border-[#4A0F41]">
-      <div className="max-w-[1000px] mx-auto text-center space-y-8 sm:space-y-10">
+    <footer className="bg-[#2C0A29] text-[#F8F4EE] pt-12 sm:pt-16 pb-28 sm:pb-16 px-5 sm:px-8 border-t border-white/10 overflow-hidden">
+      <div className="max-w-[720px] mx-auto text-center flex flex-col items-center space-y-6 sm:space-y-7">
         
-        {/* 3D Book Mockup */}
-        <div className="w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] mx-auto">
-          <BookMockup onPreviewClick={onOrderClick} showBadge={false} size="md" />
+        {/* Logótipo Rumos Seguros */}
+        <div className="flex justify-center">
+          <RumosSegurosLogo variant="light" />
         </div>
 
-        {/* Closing Headline H2 */}
-        <div className="space-y-3 sm:space-y-4 max-w-[760px] mx-auto">
-          <h2 className="font-headline font-normal text-white text-[26px] sm:text-[34px] md:text-[42px] lg:text-[46px] leading-[1.18] tracking-tight">
-            A sua vida financeira não foi feita para ser apenas sobrevida — foi feita para ser moldada.
+        {/* Mockup do Livro Oficial */}
+        <div className="relative w-full max-w-[300px] mx-auto flex justify-center items-center py-1">
+          <BookMockup onPreviewClick={onOrderClick} imageSrc="/ebook-footer.png" size="sm" />
+        </div>
+
+        {/* Chamada Final Direta e Editorial */}
+        <div className="space-y-3 max-w-[620px] mx-auto">
+          <h2 className="font-headline font-normal text-white text-[26px] sm:text-[32px] md:text-[36px] leading-[1.18] tracking-tight">
+            O Teu Progresso Financeiro Começa na Decisão de Hoje.
           </h2>
-          <p className="font-content font-normal sm:font-medium text-[#F6F1EA]/90 text-[14px] sm:text-[15px] md:text-[16px] leading-[1.6] max-w-[620px] mx-auto">
-            O sucesso deve expandir as suas escolhas, não reduzi-las. Este livro ensina as competências e a estratégia para viver com tranquilidade e autonomia.
+          <p className="font-content font-normal text-[#F8F4EE]/85 text-[14.5px] sm:text-[15.5px] leading-[1.6] max-w-[540px] mx-auto">
+            Garanta o seu exemplar e assuma o controlo do seu património com método, clareza e tranquilidade.
           </p>
         </div>
 
-        {/* CTA Button */}
-        <div className="w-full sm:w-auto flex justify-center">
-          <button
-            type="button"
+        {/* Botão de Ação Principal */}
+        <div className="w-full flex flex-col items-center gap-3 pt-1">
+          <a
+            href={CHECKOUT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={onOrderClick}
-            className="font-button font-semibold text-[12px] sm:text-[13px] md:text-[14px] text-white tracking-[1.5px] sm:tracking-[2px] uppercase bg-transparent border-2 border-white rounded-none px-7 sm:px-9 py-3.5 sm:py-4 w-full sm:w-auto inline-block text-center transition-colors duration-200 hover:bg-white hover:text-[#360A2F] cursor-pointer"
+            className="w-full max-w-[340px] min-h-[50px] font-button font-medium text-[12.5px] sm:text-[13px] text-white tracking-[0.2em] uppercase bg-transparent border border-white/90 rounded-none py-3.5 inline-flex items-center justify-center text-center transition-all duration-200 hover:bg-white hover:text-[#2C0A29] cursor-pointer shadow-md active:scale-[0.99]"
           >
-            GARANTIR O MEU EXEMPLAR • 397 MT
-          </button>
+            QUERO O MEU EXEMPLAR
+          </a>
+
+          <p className="font-content font-medium text-[11px] text-[#F8F4EE]/65 tracking-[0.2em] uppercase select-none">
+            EDIÇÃO OFICIAL • DISPONÍVEL EM MOÇAMBIQUE
+          </p>
         </div>
 
-        {/* Availability line */}
-        <p className="font-content font-semibold text-[11px] sm:text-[12px] md:text-[13px] text-[#F6F1EA]/80 tracking-[1.2px] sm:tracking-[1.5px] uppercase">
-          EDIÇÃO OFICIAL • DISPONÍVEL EM MOÇAMBIQUE
-        </p>
-
-        {/* Email / WhatsApp direct form */}
-        <div className="max-w-md mx-auto pt-2 sm:pt-4 w-full">
-          {isSent ? (
-            <div className="p-4 bg-white/10 border border-emerald-400/60 text-white text-[13px] flex flex-col items-center justify-center gap-1.5 animate-fade-in">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                <span className="font-semibold">Registo confirmado com sucesso!</span>
-              </div>
-              <p className="text-[12px] text-white/80">
-                Notificação enviada para Rosario Paulino. A abrir as opções de acesso...
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-3 w-full">
-              <div className="relative">
-                <input
-                  type="text"
-                  required
-                  placeholder="Introduza o seu E-mail ou WhatsApp*"
-                  value={contactValue}
-                  onChange={(e) => setContactValue(e.target.value)}
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3.5 rounded-none bg-transparent border border-white/40 text-white text-[14px] placeholder:text-white/50 focus:border-white focus:outline-none transition-all font-content disabled:opacity-50"
-                />
-              </div>
-
-              {errorMessage && (
-                <p className="text-rose-300 text-xs text-left">{errorMessage}</p>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3.5 px-6 rounded-none bg-white text-[#360A2F] hover:bg-transparent hover:text-white hover:border hover:border-white font-button font-semibold text-[12px] sm:text-[13px] uppercase tracking-[1.5px] sm:tracking-[2px] transition-all cursor-pointer min-h-[44px] flex items-center justify-center gap-2 disabled:opacity-60"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin text-[#360A2F]" />
-                    <span>A PROCESSAR...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-3.5 h-3.5" />
-                    <span>RECEBER INFORMAÇÕES DA EDIÇÃO OFICIAL</span>
-                  </>
-                )}
-              </button>
-
-              <p className="text-[11px] text-white/60 font-content text-center">
-                Receberá o contacto de Rosario Paulino com as instruções da edição oficial.
-              </p>
-            </form>
-          )}
-        </div>
-
-        {/* Brand and Copyright Footer Bar */}
-        <div className="pt-8 sm:pt-10 border-t border-white/15 space-y-2">
-          <div className="font-headline tracking-[0.18em] sm:tracking-[0.2em] text-[11px] sm:text-[12px] md:text-[13px] font-semibold uppercase text-white/90">
-            ROSARIO PAULINO • RUMOS SEGUROS
-          </div>
-          <div className="font-content text-[11px] sm:text-[12px] text-white/60 font-light">
-            Todos os Direitos Reservados — 2026 © Rumos Seguros • Rosario Paulino
-          </div>
+        {/* Rodapé Legal Limpo e Discreto */}
+        <div className="w-full pt-8 mt-2 border-t border-white/10 text-white/50 text-[11px] sm:text-[11.5px] space-y-1.5 font-content">
+          <p>
+            © {new Date().getFullYear()} Rosario Paulino • Rumos Seguros. Todos os direitos reservados.
+          </p>
+          <p className="text-[10.5px] text-white/40 max-w-lg mx-auto leading-relaxed">
+            Conteúdo com propósito educacional para desenvolvimento e organização financeira em Moçambique.
+          </p>
         </div>
 
       </div>
     </footer>
   );
 };
+

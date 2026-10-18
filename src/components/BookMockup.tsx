@@ -1,56 +1,65 @@
 import React from 'react';
-import { Eye, Sparkles } from 'lucide-react';
 
 interface BookMockupProps {
   onPreviewClick?: () => void;
   className?: string;
-  showBadge?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  imageSrc?: string;
+  showBadge?: boolean;
 }
 
 export const BookMockup: React.FC<BookMockupProps> = ({
   onPreviewClick,
   className = '',
-  showBadge = true,
-  size = 'md'
+  size = 'lg',
+  imageSrc = '/ebook-hero.webp',
 }) => {
+  // Proporções editoriais equilibradas para Mobile e Desktop
   const sizeClasses = {
-    sm: 'w-full max-w-[240px]',
-    md: 'w-full max-w-[280px] sm:max-w-[340px] md:max-w-[380px]',
-    lg: 'w-full max-w-[290px] sm:max-w-[360px] md:max-w-[440px] lg:max-w-[480px]'
-  };
+    sm: 'w-[170px] sm:w-[195px]',
+    md: 'w-[230px] sm:w-[265px] max-w-[80vw]',
+    lg: 'w-full max-w-[340px] lg:max-w-[390px] xl:max-w-[420px]',
+  }[size];
+
+  const webpSrc = imageSrc.endsWith('.webp') ? imageSrc : imageSrc.replace(/\.(png|jpg|jpeg)$/, '.webp');
 
   return (
-    <div className={`relative w-full flex flex-col items-center justify-center select-none ${className}`}>
-      
-      {/* 3D Professional Book Mockup Container */}
+    <div className={`relative flex flex-col items-center justify-center select-none ${className}`}>
       <div
         onClick={onPreviewClick}
-        className={`relative w-full cursor-pointer group transition-all duration-300 hover:-translate-y-1 ${sizeClasses[size]}`}
+        title={onPreviewClick ? "Clique para folhear a amostra oficial" : undefined}
+        className={`relative ${sizeClasses} mx-auto ${onPreviewClick ? 'cursor-pointer' : ''} group`}
       >
-        {/* Official 3D Hardcover Book Mockup Image */}
-        <div className="relative w-full drop-shadow-[0_20px_30px_rgba(0,0,0,0.6)] transition-all duration-300 flex items-center justify-center">
-          <img
-            src="/meu-mockup.png"
-            alt="Antes de Investir Dinheiro, Aprenda Isso - Livro Oficial de Rosario Paulino"
-            className="w-full h-auto max-h-[560px] object-contain block select-none pointer-events-none"
-            referrerPolicy="no-referrer"
-          />
+        {/* Sombra premium projetada por trás do livro */}
+        <div 
+          className="absolute inset-y-3 inset-x-4 sm:inset-y-5 sm:inset-x-6 bg-black/80 blur-xl sm:blur-2xl rounded-2xl pointer-events-none translate-y-3 sm:translate-y-5 translate-x-1.5" 
+          aria-hidden="true" 
+        />
+
+        {/* Renderização nítida do livro à frente da sombra */}
+        <div className="relative z-10 w-full flex items-center justify-center">
+          <picture className="w-full flex items-center justify-center">
+            <source srcSet={webpSrc} type="image/webp" />
+            <img
+              src={imageSrc}
+              alt="Antes de Investir, Aprenda Isto - Livro Oficial de Rosario Paulino"
+              width="1024"
+              height="1536"
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
+              className="w-full h-auto object-contain block select-none pointer-events-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]"
+              onError={(e) => {
+                const target = e.currentTarget as HTMLImageElement;
+                if (!target.src.includes('mockup-hero-OG.png') && !target.src.includes('mockup-footer-OG.webp') && !target.src.includes('ebook-hero') && !target.src.includes('ebook-footer')) {
+                  target.src = '/hero-mockup1.png';
+                }
+              }}
+            />
+          </picture>
         </div>
       </div>
-
-      {/* Optional Preview Action */}
-      {showBadge && onPreviewClick && (
-        <button
-          type="button"
-          onClick={onPreviewClick}
-          className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/90 border border-amber-400/50 text-amber-300 text-xs font-bold shadow-xl hover:bg-amber-500/20 hover:border-amber-400 transition-all cursor-pointer backdrop-blur-sm"
-        >
-          <Eye className="w-3.5 h-3.5 text-amber-400" />
-          <span>Folhear o Capítulo 1 e Sumário Grátis</span>
-          <Sparkles className="w-3 h-3 text-amber-400" />
-        </button>
-      )}
     </div>
   );
 };
+
