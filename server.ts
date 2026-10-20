@@ -28,6 +28,32 @@ app.post('/api/meta-events', async (req, res) => {
     const ip = rawIp.replace('::ffff:', '');
     const userAgent = req.headers['user-agent'] || '';
 
+    // Extrair cookies HTTP (_fbp e _fbc) para garantir máxima taxa de correspondência (EMQ)
+    const cookies: Record<string, string> = {};
+    if (req.headers.cookie) {
+      req.headers.cookie.split(';').forEach(c => {
+        const [k, ...v] = c.trim().split('=');
+        if (k) cookies[k] = decodeURIComponent(v.join('='));
+      });
+    }
+
+    const effectiveFbp = fbp || cookies['_fbp'];
+    let effectiveFbc = fbc || cookies['_fbc'];
+
+    // Se houver fbclid na URL e não houver fbc, criar no formato canónico da Meta: fb.1.<timestamp>.<fbclid>
+    if (!effectiveFbc) {
+      try {
+        const targetUrl = event_source_url || (req.headers.referer as string) || '';
+        if (targetUrl) {
+          const urlObj = new URL(targetUrl, 'https://rumos-seguros.com');
+          const fbclid = urlObj.searchParams.get('fbclid');
+          if (fbclid) {
+            effectiveFbc = `fb.1.${Date.now()}.${fbclid}`;
+          }
+        }
+      } catch (e) {}
+    }
+
     const payload = {
       data: [
         {
@@ -39,8 +65,8 @@ app.post('/api/meta-events', async (req, res) => {
           user_data: {
             client_ip_address: ip,
             client_user_agent: userAgent,
-            ...(fbp ? { fbp } : {}),
-            ...(fbc ? { fbc } : {})
+            ...(effectiveFbp ? { fbp: effectiveFbp } : {}),
+            ...(effectiveFbc ? { fbc: effectiveFbc } : {})
           },
           ...(custom_data ? { custom_data } : {})
         }

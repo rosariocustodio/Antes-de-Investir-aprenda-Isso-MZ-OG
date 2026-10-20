@@ -57,7 +57,15 @@
         fbq('init', '1433052258793282');
         fbq('track', 'PageView', {}, { eventID: window.__initialPageViewId });
 
-        // Disparo Server-side Meta Conversions API (CAPI) com deduplicação exata
+        // Função para ler cookies da Meta (_fbp e _fbc)
+        function getCookie(name) {
+          try {
+            var m = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
+            return m ? decodeURIComponent(m[2]) : null;
+          } catch(e) { return null; }
+        }
+
+        // Disparo Server-side Meta Conversions API (CAPI) com deduplicação e dados enriquecidos
         try {
           fetch('/api/meta-events', {
             method: 'POST',
@@ -65,7 +73,9 @@
             body: JSON.stringify({
               event_name: 'PageView',
               event_id: window.__initialPageViewId,
-              event_source_url: window.location.href
+              event_source_url: window.location.href,
+              fbp: getCookie('_fbp'),
+              fbc: getCookie('_fbc')
             }),
             keepalive: true
           }).catch(function() {});

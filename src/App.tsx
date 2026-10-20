@@ -199,6 +199,15 @@ export const App: React.FC = () => {
 
     // 2. Disparar evento InitiateCheckout no Meta Conversions API (Server-Side)
     try {
+      const getCookie = (name: string) => {
+        try {
+          const m = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
+          return m ? decodeURIComponent(m[2]) : undefined;
+        } catch (e) {
+          return undefined;
+        }
+      };
+
       fetch('/api/meta-events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -206,6 +215,8 @@ export const App: React.FC = () => {
           event_name: 'InitiateCheckout',
           event_id: checkoutEventId,
           event_source_url: window.location.href,
+          fbp: getCookie('_fbp'),
+          fbc: getCookie('_fbc'),
           custom_data: {
             content_name: 'Antes de Investir, Aprenda Isto',
             content_category: 'E-book / Finanças',
