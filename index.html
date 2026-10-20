@@ -56,6 +56,20 @@
         window.__initialPageViewId = 'PageView_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
         fbq('init', '1433052258793282');
         fbq('track', 'PageView', {}, { eventID: window.__initialPageViewId });
+
+        // Disparo Server-side Meta Conversions API (CAPI) com deduplicação exata
+        try {
+          fetch('/api/meta-events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              event_name: 'PageView',
+              event_id: window.__initialPageViewId,
+              event_source_url: window.location.href
+            }),
+            keepalive: true
+          }).catch(function() {});
+        } catch(err) {}
       })();
     </script>
     <!-- Proteção contra Gravação de Ecrã (Screen Recording / WebRTC / Extensões) -->

@@ -181,7 +181,9 @@ export const App: React.FC = () => {
   }, []);
 
   const handleBuyClick = (e?: React.MouseEvent) => {
-    // Disparar evento InitiateCheckout no Meta Pixel
+    const checkoutEventId = 'InitiateCheckout_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+
+    // 1. Disparar evento InitiateCheckout no Meta Pixel (Browser)
     try {
       if (typeof window !== 'undefined' && (window as any).fbq) {
         (window as any).fbq('track', 'InitiateCheckout', {
@@ -189,10 +191,32 @@ export const App: React.FC = () => {
           content_category: 'E-book / Finanças',
           value: 349.00,
           currency: 'MZN'
-        });
+        }, { eventID: checkoutEventId });
       }
     } catch (err) {
       console.warn('Pixel tracking error', err);
+    }
+
+    // 2. Disparar evento InitiateCheckout no Meta Conversions API (Server-Side)
+    try {
+      fetch('/api/meta-events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'InitiateCheckout',
+          event_id: checkoutEventId,
+          event_source_url: window.location.href,
+          custom_data: {
+            content_name: 'Antes de Investir, Aprenda Isto',
+            content_category: 'E-book / Finanças',
+            value: 349.00,
+            currency: 'MZN'
+          }
+        }),
+        keepalive: true
+      }).catch(() => {});
+    } catch (err) {
+      console.warn('CAPI tracking error', err);
     }
 
     // Se o clique veio de um elemento que não é um link com target _blank (ex: click no mockup):
