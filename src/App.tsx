@@ -89,8 +89,16 @@ export const App: React.FC = () => {
         }
       }
 
-      // Bloquear atalhos de Gravação de Ecrã do Windows (Win + Alt + R / Alt + R) e Xbox Game Bar (Win + G / Alt + G)
-      if ((e.metaKey || e.altKey) && (key === 'R' || key === 'G')) {
+      // Bloquear atalho de Gravação de Ecrã do Windows Game Bar (Win + Alt + R)
+      if (e.metaKey && e.altKey && key === 'R') {
+        e.preventDefault();
+        e.stopPropagation();
+        triggerScreenshotBlock();
+        return false;
+      }
+
+      // Bloquear Xbox Game Bar (Win + G)
+      if (e.metaKey && !e.altKey && !e.ctrlKey && key === 'G') {
         e.preventDefault();
         e.stopPropagation();
         triggerScreenshotBlock();

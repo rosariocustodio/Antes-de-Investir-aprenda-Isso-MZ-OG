@@ -93,23 +93,46 @@ app.post('/api/meta-events', async (req, res) => {
 // Montar Vite em modo desenvolvimento ou ficheiros estáticos em produção
 async function startServer() {
   const isProduction = process.env.NODE_ENV === 'production';
+  const portArgIndex = process.argv.indexOf('--port');
+  const argPort = portArgIndex !== -1 ? parseInt(process.argv[portArgIndex + 1], 10) : NaN;
+  const activePort = !isNaN(argPort) ? argPort : (parseInt(process.env.PORT || '3000', 10));
+
+  const { createServer: createHttpServer } = await import('http');
+  const httpServer = createHttpServer(app);
 
   if (!isProduction) {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: { server: httpServer }
+      },
       appType: 'spa'
     });
     app.use(vite.middlewares);
+
+    // Fallback para SPA em desenvolvimento (Express 5 compatível)
+    app.use(async (req, res, next) => {
+      const url = req.originalUrl;
+      try {
+        const fs = await import('fs');
+        let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
+        template = await vite.transformIndexHtml(url, template);
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
+      } catch (e: any) {
+        vite.ssrFixStacktrace(e);
+        next(e);
+      }
+    });
   } else {
     app.use(express.static(path.resolve(__dirname, 'dist')));
-    app.get('*', (_req, res) => {
+    app.use((_req, res) => {
       res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
     });
   }
 
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+  httpServer.listen(activePort, '0.0.0.0', () => {
+    console.log(`Server listening on port ${activePort} (0.0.0.0)`);
   });
 }
 
