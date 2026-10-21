@@ -62,7 +62,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOrderClick }) 
 
           {/* Valor atual em destaque */}
           <div className="font-headline font-normal text-[#360A2F] text-[34px] sm:text-[42px] leading-tight tracking-tight mb-2">
-            Por apenas 349 MT
+            Por apenas 299 MT
           </div>
 
           {/* Linha informativa exata da Screenshot 6 */}

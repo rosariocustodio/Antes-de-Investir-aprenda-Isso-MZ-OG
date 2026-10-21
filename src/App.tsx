@@ -189,7 +189,7 @@ export const App: React.FC = () => {
         (window as any).fbq('track', 'InitiateCheckout', {
           content_name: 'Antes de Investir, Aprenda Isto',
           content_category: 'E-book / Finanças',
-          value: 349.00,
+          value: 299.00,
           currency: 'MZN'
         }, { eventID: checkoutEventId });
       }
@@ -220,7 +220,7 @@ export const App: React.FC = () => {
           custom_data: {
             content_name: 'Antes de Investir, Aprenda Isto',
             content_category: 'E-book / Finanças',
-            value: 349.00,
+            value: 299.00,
             currency: 'MZN'
           }
         }),
@@ -257,7 +257,7 @@ export const App: React.FC = () => {
         onOrderClick={handleBuyClick}
       />
 
-      {/* 4. Preço & Investimento 349 MT (Screenshots 5 e 6) */}
+      {/* 4. Preço & Investimento 299 MT (Screenshots 5 e 6) */}
       <PricingSection
         onOrderClick={handleBuyClick}
       />

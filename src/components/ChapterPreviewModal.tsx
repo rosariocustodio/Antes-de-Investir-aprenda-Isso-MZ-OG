@@ -100,7 +100,7 @@ export const ChapterPreviewModal: React.FC<ChapterPreviewModalProps> = ({
               Edição Oficial Completa • 30 Capítulos
             </span>
             <span className="font-headline text-[22px] text-[#2C0A29] font-bold">
-              349 MT <span className="text-[13px] font-normal text-neutral-400 line-through">649 MT</span>
+              299 MT <span className="text-[13px] font-normal text-neutral-400 line-through">649 MT</span>
             </span>
           </div>
 

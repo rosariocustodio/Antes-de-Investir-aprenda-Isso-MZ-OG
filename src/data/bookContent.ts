@@ -23,9 +23,9 @@ export const BOOK_DATA = {
   chaptersCount: 30,
   readingTime: 'Aproximadamente 45 a 60 minutos',
   originalPrice: 649,
-  currentPrice: 349,
+  currentPrice: 299,
   currency: 'MT',
-  discountPercentage: 46,
+  discountPercentage: 54,
   guaranteeDays: 7,
   checkoutUrl: CHECKOUT_URL,
 };
@@ -33,11 +33,11 @@ export const BOOK_DATA = {
 export const FAQS: FAQItem[] = [
   {
     question: 'Como e quando vou receber o livro após o pagamento?',
-    answer: 'A disponibilização é imediata e digital. Assim que o pagamento de 349 MT for confirmado (seja por M-Pesa, e-Mola ou Cartão), o acesso completo à edição oficial do livro é enviado para o seu e-mail e disponibilizado também no seu WhatsApp, garantindo que tenha sempre o seu exemplar guardado.'
+    answer: 'A disponibilização é imediata e digital. Assim que o pagamento de 299 MT for confirmado (seja por M-Pesa, e-Mola ou Cartão), o acesso completo à edição oficial do livro é enviado para o seu e-mail e disponibilizado também no seu WhatsApp, garantindo que tenha sempre o seu exemplar guardado.'
   },
   {
-    question: 'Por que o preço está em valor promocional de 349 MT?',
-    answer: 'O preço original do livro é de 649 MT, mas disponibilizamos esta edição com um valor promocional de lançamento de 349 MT para tornar este conhecimento acessível a qualquer trabalhador ou profissional em Moçambique, sem comprometer o orçamento do mês. Por um valor inferior ao de uma refeição simples, tem acesso a 30 capítulos práticos com ferramentas aplicáveis à nossa realidade económica — esta oferta é por tempo limitado e o valor subirá em breve.'
+    question: 'Por que o preço está em valor promocional de 299 MT?',
+    answer: 'O preço original do livro é de 649 MT, mas disponibilizamos esta edição com um valor promocional de lançamento de 299 MT para tornar este conhecimento acessível a qualquer trabalhador ou profissional em Moçambique, sem comprometer o orçamento do mês. Por um valor inferior ao de uma refeição simples, tem acesso a 30 capítulos práticos com ferramentas aplicáveis à nossa realidade económica — esta oferta é por tempo limitado e o valor subirá em breve.'
   },
   {
     question: 'Não tenho cartão de crédito ou conta bancária. Como posso pagar?',
@@ -57,7 +57,7 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: 'E se eu adquirir e achar que o livro não é para mim?',
-    answer: 'Conta com a nossa Garantia Incondicional de 7 Dias. Se após a leitura sentir que o conteúdo não agregou valor prático, basta enviar-nos uma mensagem no WhatsApp ou e-mail que devolveremos 100% dos seus 349 MT sem burocracias.'
+    answer: 'Conta com a nossa Garantia Incondicional de 7 Dias. Se após a leitura sentir que o conteúdo não agregou valor prático, basta enviar-nos uma mensagem no WhatsApp ou e-mail que devolveremos 100% dos seus 299 MT sem burocracias.'
   },
   {
     question: 'Eu vivo em Angola, posso comprar nesta página?',
