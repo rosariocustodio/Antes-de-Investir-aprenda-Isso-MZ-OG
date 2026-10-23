@@ -45,7 +45,7 @@ app.post('/api/meta-events', async (req, res) => {
       try {
         const targetUrl = event_source_url || (req.headers.referer as string) || '';
         if (targetUrl) {
-          const urlObj = new URL(targetUrl, 'https://rumos-seguros.com');
+          const urlObj = new URL(targetUrl, 'https://rumoseguros.site');
           const fbclid = urlObj.searchParams.get('fbclid');
           if (fbclid) {
             effectiveFbc = `fb.1.${Date.now()}.${fbclid}`;
@@ -60,7 +60,7 @@ app.post('/api/meta-events', async (req, res) => {
           event_name: event_name || 'PageView',
           event_time: Math.floor(Date.now() / 1000),
           event_id: event_id || `capi_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
-          event_source_url: event_source_url || req.headers.referer || 'https://rumos-seguros.com',
+          event_source_url: event_source_url || req.headers.referer || 'https://rumoseguros.site',
           action_source: 'website',
           user_data: {
             client_ip_address: ip,
