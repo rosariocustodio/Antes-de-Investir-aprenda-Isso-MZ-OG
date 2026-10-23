@@ -247,12 +247,60 @@ export const App: React.FC = () => {
     }
   };
 
+  const handleOpenPreview = () => {
+    setIsPreviewOpen(true);
+    const viewContentEventId = 'ViewContent_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+
+    // 1. Disparar ViewContent no Meta Pixel (Browser)
+    try {
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'ViewContent', {
+          content_name: 'Amostra Oficial • Capítulo I',
+          content_category: 'E-book / Finanças',
+          value: 299.00,
+          currency: 'MZN'
+        }, { eventID: viewContentEventId });
+      }
+    } catch (err) {}
+
+    // 2. Disparar ViewContent no Meta Conversions API (Server-Side)
+    try {
+      const getCookie = (name: string) => {
+        try {
+          const m = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
+          return m ? decodeURIComponent(m[2]) : undefined;
+        } catch (e) {
+          return undefined;
+        }
+      };
+
+      fetch('/api/meta-events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'ViewContent',
+          event_id: viewContentEventId,
+          event_source_url: window.location.href,
+          fbp: getCookie('_fbp'),
+          fbc: getCookie('_fbc'),
+          custom_data: {
+            content_name: 'Amostra Oficial • Capítulo I',
+            content_category: 'E-book / Finanças',
+            value: 299.00,
+            currency: 'MZN'
+          }
+        }),
+        keepalive: true
+      }).catch(() => {});
+    } catch (err) {}
+  };
+
   return (
     <div className="min-h-screen bg-[#2C0A29] text-[#F8F4EE] font-content antialiased relative overflow-x-hidden selection:bg-amber-500/30 selection:text-white">
       {/* 1. Hero Section (Screenshot 1) */}
       <TradeTravelHero
         onOrderClick={handleBuyClick}
-        onPreviewClick={() => setIsPreviewOpen(true)}
+        onPreviewClick={handleOpenPreview}
       />
 
       {/* 2. Colagem Editorial e o que o Método Ensina (Screenshots 2 e 3) */}
@@ -323,18 +371,6 @@ export const App: React.FC = () => {
           </button>
         </div>
       )}
-
-      {/* 10. Marca d'Água Forense Anti-Pirataria (Invisível na leitura, gravada em vídeos/câmaras) */}
-      <div 
-        className="pointer-events-none fixed inset-0 z-30 overflow-hidden opacity-[0.03] select-none flex flex-wrap gap-20 items-center justify-around rotate-[-15deg] scale-125"
-        aria-hidden="true"
-      >
-        {Array.from({ length: 30 }).map((_, i) => (
-          <span key={i} className="text-white text-[11px] sm:text-[12px] font-semibold tracking-[0.25em] uppercase whitespace-nowrap">
-            Rumos Seguros • Propriedade Oficial • Gravação Proibida
-          </span>
-        ))}
-      </div>
     </div>
   );
 };

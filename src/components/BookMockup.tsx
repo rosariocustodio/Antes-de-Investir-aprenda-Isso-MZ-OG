@@ -12,13 +12,13 @@ export const BookMockup: React.FC<BookMockupProps> = ({
   onPreviewClick,
   className = '',
   size = 'lg',
-  imageSrc = '/ebook-hero.webp',
+  imageSrc = '/mockup principal.webp',
 }) => {
   // Proporções editoriais equilibradas para Mobile e Desktop
   const sizeClasses = {
     sm: 'w-[170px] sm:w-[195px]',
-    md: 'w-[230px] sm:w-[265px] max-w-[80vw]',
-    lg: 'w-full max-w-[340px] lg:max-w-[390px] xl:max-w-[420px]',
+    md: 'w-[260px] sm:w-[300px] max-w-[88vw]',
+    lg: 'w-full max-w-[360px] sm:max-w-[400px] lg:max-w-[440px] xl:max-w-[470px]',
   }[size];
 
   const webpSrc = imageSrc.endsWith('.webp') ? imageSrc : imageSrc.replace(/\.(png|jpg|jpeg)$/, '.webp');
@@ -51,8 +51,8 @@ export const BookMockup: React.FC<BookMockupProps> = ({
               className="w-full h-auto object-contain block select-none pointer-events-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]"
               onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
-                if (!target.src.includes('mockup-hero-OG.png') && !target.src.includes('mockup-footer-OG.webp') && !target.src.includes('ebook-hero') && !target.src.includes('ebook-footer')) {
-                  target.src = '/hero-mockup1.png';
+                if (!target.src.includes('mockup%20principal')) {
+                  target.src = '/mockup principal.webp';
                 }
               }}
             />

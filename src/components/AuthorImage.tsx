@@ -20,12 +20,6 @@ export const AuthorImage: React.FC<AuthorImageProps> = ({
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
-          onError={(e) => {
-            const target = e.currentTarget as HTMLImageElement;
-            if (target.src.endsWith('.webp')) {
-              target.src = '/moderno-autor.jpg';
-            }
-          }}
         />
       </picture>
     </div>

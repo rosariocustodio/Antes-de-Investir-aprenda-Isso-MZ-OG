@@ -17,9 +17,13 @@ export const TradeTravelFooter: React.FC<TradeTravelFooterProps> = ({ onOrderCli
           <RumosSegurosLogo variant="light" />
         </div>
 
-        {/* Mockup do Livro Oficial */}
-        <div className="relative w-full max-w-[300px] mx-auto flex justify-center items-center py-1">
-          <BookMockup onPreviewClick={onOrderClick} imageSrc="/ebook-footer.png" size="sm" />
+        {/* Mockup do Livro Oficial no Rodapé (footer-mockup 3.png sem fundo, tamanho premium no mobile e PC) */}
+        <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[390px] mx-auto flex justify-center items-center py-2 sm:py-3">
+          <BookMockup 
+            onPreviewClick={onOrderClick} 
+            imageSrc="/footer-mockup 3.png" 
+            size="lg" 
+          />
         </div>
 
         {/* Chamada Final Direta e Editorial */}

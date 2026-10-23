@@ -35,7 +35,7 @@ export const AuthorStorySection: React.FC<AuthorStorySectionProps> = ({ onOrderC
           <picture className="w-full block bg-[#E4DAD9]">
             <source srcSet="/moderno-autor.webp" type="image/webp" />
             <img
-              src="/moderno-autor.jpg"
+              src="/moderno-autor.webp"
               alt="Rosario Paulino - Autor e Fundador da Rumos Seguros"
               className="w-full h-auto object-contain block select-none"
               loading="eager"

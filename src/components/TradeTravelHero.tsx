@@ -46,12 +46,12 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
               <span className="text-white font-medium">antes de dar o próximo passo.</span>
             </p>
 
-            {/* Mockup no Mobile (posicionado harmonicamente entre subtítulo e botão) */}
+            {/* Mockup no Mobile (posicionado harmonicamente com escala premium) */}
             <div className="md:hidden w-full flex justify-center py-2 mb-6">
-              <div className="w-full max-w-[270px]">
+              <div className="w-full max-w-[300px] sm:max-w-[330px]">
                 <BookMockup 
                   onPreviewClick={onPreviewClick} 
-                  imageSrc="/ebook-hero.webp" 
+                  imageSrc="/mockup principal.webp" 
                   size="md" 
                 />
               </div>
@@ -82,12 +82,12 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
 
           </div>
 
-          {/* Coluna do Mockup no Desktop (PC) */}
+          {/* Coluna do Mockup no Desktop (PC - Escala Premium) */}
           <div className="hidden md:flex md:col-span-5 justify-center items-center w-full pl-2 lg:pl-6">
-            <div className="w-full max-w-[360px] lg:max-w-[400px] xl:max-w-[430px] flex justify-center">
+            <div className="w-full max-w-[400px] lg:max-w-[440px] xl:max-w-[470px] flex justify-center">
               <BookMockup 
                 onPreviewClick={onPreviewClick} 
-                imageSrc="/ebook-hero.webp" 
+                imageSrc="/mockup principal.webp" 
                 size="lg" 
               />
             </div>

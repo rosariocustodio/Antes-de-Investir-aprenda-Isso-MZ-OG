@@ -22,31 +22,31 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOrderClick }) 
         {/* Card do Preço Editorial matching Screenshot 5 & 6 */}
         <div className="w-full max-w-[480px] bg-white border border-[#360A2F]/15 py-8 px-6 sm:px-10 shadow-sm flex flex-col items-center">
           
-          {/* Mockup ebook-footer com reflexo tipo espelho 100% alinhado à perspetiva */}
+          {/* Mockup footer-mockup 3 com reflexo de espelho suave e premium */}
           <div className="relative mb-5 flex justify-center items-center">
             <div 
               onClick={onOrderClick}
               title="Garantir exemplar oficial"
-              className="relative w-[125px] sm:w-[138px] cursor-pointer group"
+              className="relative w-[130px] sm:w-[145px] cursor-pointer group"
             >
-              {/* Sombra de profundidade suave e realista por trás do livro */}
+              {/* Sombra de profundidade suave e discreta */}
               <div 
-                className="absolute inset-y-4 inset-x-3 bg-black/20 blur-lg rounded-xl pointer-events-none translate-y-1 transition-opacity duration-300 group-hover:opacity-90" 
+                className="absolute inset-y-4 inset-x-3 bg-black/10 blur-lg rounded-xl pointer-events-none translate-y-1 transition-opacity duration-300 group-hover:opacity-60" 
                 aria-hidden="true" 
               />
               
-              {/* Imagem do livro com reflexo espelho perfeitamente contínuo na linha de base */}
+              {/* Mockup footer-mockup 3 com reflexo de espelho equilibrado e sofisticado */}
               <div className="relative z-10 w-full flex items-center justify-center">
                 <picture className="w-full flex items-center justify-center">
-                  <source srcSet="/ebook-pricing-mockup.webp" type="image/webp" />
+                  <source srcSet="/pricing-mockup-reflected.webp" type="image/webp" />
                   <img
-                    src="/ebook-pricing-mockup.png"
+                    src="/pricing-mockup-reflected.png"
                     alt="Antes de Investir, Aprenda Isto - Rosario Paulino"
                     width="779"
-                    height="1413"
+                    height="1584"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-auto object-contain block select-none pointer-events-none drop-shadow-[0_6px_14px_rgba(0,0,0,0.12)] transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="w-full h-auto object-contain block select-none pointer-events-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </picture>
               </div>
