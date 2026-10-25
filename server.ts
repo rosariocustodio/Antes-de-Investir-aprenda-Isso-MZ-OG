@@ -37,22 +37,41 @@ app.post('/api/meta-events', async (req, res) => {
       });
     }
 
-    const effectiveFbp = fbp || cookies['_fbp'];
+    let effectiveFbp = fbp || cookies['_fbp'];
     let effectiveFbc = fbc || cookies['_fbc'];
 
-    // Se houver fbclid na URL e não houver fbc, criar no formato canónico da Meta: fb.1.<timestamp>.<fbclid>
+    // Se houver fbclid em event_source_url, referer ou req.url, sintetizar fbc canónico oficial: fb.1.<timestamp>.<fbclid>
     if (!effectiveFbc) {
-      try {
-        const targetUrl = event_source_url || (req.headers.referer as string) || '';
-        if (targetUrl) {
-          const urlObj = new URL(targetUrl, 'https://rumoseguros.site');
-          const fbclid = urlObj.searchParams.get('fbclid');
-          if (fbclid) {
-            effectiveFbc = `fb.1.${Date.now()}.${fbclid}`;
-          }
+      const candidates = [event_source_url, req.headers.referer, req.url];
+      for (const cand of candidates) {
+        if (cand && typeof cand === 'string' && cand.includes('fbclid')) {
+          try {
+            const urlObj = new URL(cand, 'https://www.rumoseguros.site');
+            const foundFbclid = urlObj.searchParams.get('fbclid');
+            if (foundFbclid) {
+              effectiveFbc = `fb.1.${Date.now()}.${foundFbclid}`;
+              break;
+            }
+          } catch (e) {}
         }
-      } catch (e) {}
+      }
     }
+
+    // Se ainda não houver fbp, gerar identificador de navegador canónico da Meta
+    if (!effectiveFbp) {
+      effectiveFbp = `fb.1.${Date.now()}.${Math.floor(1000000000 + Math.random() * 9000000000)}`;
+    }
+
+    // Gravar cookies 1st party via HTTP Header (imunes às restrições do Safari ITP)
+    try {
+      const cookieHeaders: string[] = [
+        `_fbp=${encodeURIComponent(effectiveFbp)}; Path=/; Max-Age=7776000; SameSite=Lax`
+      ];
+      if (effectiveFbc) {
+        cookieHeaders.push(`_fbc=${encodeURIComponent(effectiveFbc)}; Path=/; Max-Age=7776000; SameSite=Lax`);
+      }
+      res.setHeader('Set-Cookie', cookieHeaders);
+    } catch (e) {}
 
     const payload = {
       data: [

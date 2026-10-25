@@ -163,14 +163,60 @@
           return;
         }
 
+        var fbcVal = null;
+        var fbpVal = null;
+
+        // 1. Capturar fbclid e definir fbc imediatamente no formato canónico oficial da Meta
         try {
           var urlParams = new URLSearchParams(window.location.search);
           var fbclid = urlParams.get('fbclid');
+          if (!fbclid && document.referrer) {
+            try {
+              var ref = new URL(document.referrer);
+              fbclid = ref.searchParams.get('fbclid');
+            } catch(e) {}
+          }
+
+          var cookieDomain = window.location.hostname.indexOf('rumoseguros.site') !== -1 ? ';domain=.rumoseguros.site' : '';
+          var maxAge = 60 * 60 * 24 * 90; // 90 dias
+
           if (fbclid) {
-            var fbcValue = 'fb.1.' + Date.now() + '.' + fbclid;
-            var maxAge = 60 * 60 * 24 * 90;
-            document.cookie = '_fbc=' + encodeURIComponent(fbcValue) + ';path=/;max-age=' + maxAge + ';SameSite=Lax';
-            try { sessionStorage.setItem('meta_fbclid', fbclid); } catch(e) {}
+            fbcVal = 'fb.1.' + Date.now() + '.' + fbclid;
+            document.cookie = '_fbc=' + encodeURIComponent(fbcVal) + ';path=/;max-age=' + maxAge + cookieDomain + ';SameSite=Lax';
+            try {
+              localStorage.setItem('_fbc', fbcVal);
+              localStorage.setItem('meta_fbclid', fbclid);
+              localStorage.setItem('meta_fbc_time', Date.now().toString());
+              sessionStorage.setItem('_fbc', fbcVal);
+            } catch(e) {}
+          } else {
+            // Tentar recuperar do cookie ou localStorage existente
+            try {
+              var m = document.cookie.match(/(^|;\s*)_fbc=([^;]*)/);
+              if (m && m[2]) {
+                fbcVal = decodeURIComponent(m[2]);
+              } else if (window.localStorage) {
+                fbcVal = localStorage.getItem('_fbc');
+                var savedFbcId = localStorage.getItem('meta_fbclid');
+                if (!fbcVal && savedFbcId) {
+                  var savedTime = localStorage.getItem('meta_fbc_time') || Date.now().toString();
+                  fbcVal = 'fb.1.' + savedTime + '.' + savedFbcId;
+                }
+              }
+            } catch(e) {}
+          }
+
+          // 2. Garantir fbp (Browser ID) da Meta
+          var mP = document.cookie.match(/(^|;\s*)_fbp=([^;]*)/);
+          if (mP && mP[2]) {
+            fbpVal = decodeURIComponent(mP[2]);
+          } else if (window.localStorage) {
+            fbpVal = localStorage.getItem('_fbp');
+          }
+          if (!fbpVal) {
+            fbpVal = 'fb.1.' + Date.now() + '.' + Math.floor(1000000000 + Math.random() * 9000000000);
+            document.cookie = '_fbp=' + encodeURIComponent(fbpVal) + ';path=/;max-age=' + maxAge + cookieDomain + ';SameSite=Lax';
+            try { localStorage.setItem('_fbp', fbpVal); } catch(e) {}
           }
         } catch (e) {}
 
@@ -185,17 +231,13 @@
         
         window.__initialPageViewId = 'PageView_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
         fbq('init', '1433052258793282');
-        fbq('track', 'PageView', {}, { eventID: window.__initialPageViewId });
+        
+        var pageViewOptions = { eventID: window.__initialPageViewId };
+        if (fbcVal) pageViewOptions.fbc = fbcVal;
+        if (fbpVal) pageViewOptions.fbp = fbpVal;
+        fbq('track', 'PageView', {}, pageViewOptions);
 
-        // Função para ler cookies da Meta (_fbp e _fbc)
-        function getCookie(name) {
-          try {
-            var m = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
-            return m ? decodeURIComponent(m[2]) : null;
-          } catch(e) { return null; }
-        }
-
-        // Disparo Server-side Meta Conversions API (CAPI) com deduplicação e dados enriquecidos
+        // Disparo Server-side Meta Conversions API (CAPI) com fbc e fbp garantidos
         try {
           fetch('/api/meta-events', {
             method: 'POST',
@@ -204,8 +246,8 @@
               event_name: 'PageView',
               event_id: window.__initialPageViewId,
               event_source_url: window.location.href,
-              fbp: getCookie('_fbp'),
-              fbc: getCookie('_fbc')
+              fbp: fbpVal,
+              fbc: fbcVal
             }),
             keepalive: true
           }).catch(function() {});

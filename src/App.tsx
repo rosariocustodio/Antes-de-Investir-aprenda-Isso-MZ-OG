@@ -9,13 +9,18 @@ import { TradeTravelFooter } from './components/TradeTravelFooter';
 import { StickyBottomBar } from './components/StickyBottomBar';
 import { ChapterPreviewModal } from './components/ChapterPreviewModal';
 import { CHECKOUT_URL } from './config/checkout';
+import { trackMetaEvent, attachTrackingToUrl, getOrSetFbc, getOrSetFbp } from './utils/metaTracking';
 
 export const App: React.FC = () => {
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isScreenshotBlocked, setIsScreenshotBlocked] = useState(false);
 
+  // Inicializar e garantir captura de fbc e fbp logo na inicialização
   useEffect(() => {
+    getOrSetFbc();
+    getOrSetFbp();
+
     const handleScroll = () => {
       setShowStickyBar(window.scrollY > 450);
     };
@@ -189,110 +194,34 @@ export const App: React.FC = () => {
   }, []);
 
   const handleBuyClick = (e?: React.MouseEvent) => {
-    const checkoutEventId = 'InitiateCheckout_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+    // Disparo garantido com 100% de cobertura de fbc e fbp (Pixel + CAPI)
+    trackMetaEvent('InitiateCheckout', {
+      content_name: 'Antes de Investir, Aprenda Isto',
+      content_category: 'E-book / Finanças',
+      value: 299.00,
+      currency: 'MZN'
+    });
 
-    // 1. Disparar evento InitiateCheckout no Meta Pixel (Browser)
-    try {
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'InitiateCheckout', {
-          content_name: 'Antes de Investir, Aprenda Isto',
-          content_category: 'E-book / Finanças',
-          value: 299.00,
-          currency: 'MZN'
-        }, { eventID: checkoutEventId });
-      }
-    } catch (err) {
-      console.warn('Pixel tracking error', err);
-    }
-
-    // 2. Disparar evento InitiateCheckout no Meta Conversions API (Server-Side)
-    try {
-      const getCookie = (name: string) => {
-        try {
-          const m = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
-          return m ? decodeURIComponent(m[2]) : undefined;
-        } catch (e) {
-          return undefined;
-        }
-      };
-
-      fetch('/api/meta-events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_name: 'InitiateCheckout',
-          event_id: checkoutEventId,
-          event_source_url: window.location.href,
-          fbp: getCookie('_fbp'),
-          fbc: getCookie('_fbc'),
-          custom_data: {
-            content_name: 'Antes de Investir, Aprenda Isto',
-            content_category: 'E-book / Finanças',
-            value: 299.00,
-            currency: 'MZN'
-          }
-        }),
-        keepalive: true
-      }).catch(() => {});
-    } catch (err) {
-      console.warn('CAPI tracking error', err);
-    }
+    const targetUrl = attachTrackingToUrl(CHECKOUT_URL);
 
     // Se o clique veio de um elemento que não é um link com target _blank (ex: click no mockup):
     if (!e || !(e.currentTarget instanceof HTMLAnchorElement)) {
-      const opened = window.open(CHECKOUT_URL, '_blank', 'noopener,noreferrer');
+      const opened = window.open(targetUrl, '_blank', 'noopener,noreferrer');
       if (!opened || opened.closed || typeof opened.closed === 'undefined') {
-        window.location.href = CHECKOUT_URL;
+        window.location.href = targetUrl;
       }
     }
   };
 
   const handleOpenPreview = () => {
     setIsPreviewOpen(true);
-    const viewContentEventId = 'ViewContent_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
-
-    // 1. Disparar ViewContent no Meta Pixel (Browser)
-    try {
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'ViewContent', {
-          content_name: 'Amostra Oficial • Capítulo I',
-          content_category: 'E-book / Finanças',
-          value: 299.00,
-          currency: 'MZN'
-        }, { eventID: viewContentEventId });
-      }
-    } catch (err) {}
-
-    // 2. Disparar ViewContent no Meta Conversions API (Server-Side)
-    try {
-      const getCookie = (name: string) => {
-        try {
-          const m = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
-          return m ? decodeURIComponent(m[2]) : undefined;
-        } catch (e) {
-          return undefined;
-        }
-      };
-
-      fetch('/api/meta-events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_name: 'ViewContent',
-          event_id: viewContentEventId,
-          event_source_url: window.location.href,
-          fbp: getCookie('_fbp'),
-          fbc: getCookie('_fbc'),
-          custom_data: {
-            content_name: 'Amostra Oficial • Capítulo I',
-            content_category: 'E-book / Finanças',
-            value: 299.00,
-            currency: 'MZN'
-          }
-        }),
-        keepalive: true
-      }).catch(() => {});
-    } catch (err) {}
+    // Disparo garantido com 100% de cobertura de fbc e fbp (Pixel + CAPI)
+    trackMetaEvent('ViewContent', {
+      content_name: 'Amostra Oficial • Capítulo I',
+      content_category: 'E-book / Finanças',
+      value: 299.00,
+      currency: 'MZN'
+    });
   };
 
   return (
