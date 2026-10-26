@@ -20,6 +20,23 @@ app.post('/api/meta-events', async (req, res) => {
   try {
     const { event_name, event_id, event_source_url, custom_data, fbp, fbc } = req.body;
 
+    // BLOQUEIO RIGOROSO: O evento "Purchase" NUNCA pode ser enviado por este site/servidor.
+    // O Purchase virá apenas da Tutora após a confirmação do pagamento.
+    if (event_name && (event_name === 'Purchase' || event_name.toLowerCase() === 'purchase')) {
+      return res.status(403).json({
+        error: 'Purchase event is strictly disallowed on this server. Purchases are handled exclusively by Tutora post-payment.'
+      });
+    }
+
+    // Apenas estes 3 eventos são aceites na landing page
+    const ALLOWED_EVENTS = ['PageView', 'ViewContent', 'InitiateCheckout'];
+    const targetEventName = event_name || 'PageView';
+    if (!ALLOWED_EVENTS.includes(targetEventName)) {
+      return res.status(400).json({
+        error: `Event '${targetEventName}' is not allowed on this landing page endpoint.`
+      });
+    }
+
     if (!META_CAPI_ACCESS_TOKEN) {
       return res.status(500).json({ error: 'META_CAPI_ACCESS_TOKEN not configured' });
     }
@@ -76,7 +93,7 @@ app.post('/api/meta-events', async (req, res) => {
     const payload = {
       data: [
         {
-          event_name: event_name || 'PageView',
+          event_name: targetEventName,
           event_time: Math.floor(Date.now() / 1000),
           event_id: event_id || `capi_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
           event_source_url: event_source_url || req.headers.referer || 'https://rumoseguros.site',

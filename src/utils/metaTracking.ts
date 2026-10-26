@@ -212,6 +212,20 @@ export function trackMetaEvent(
   customData: Record<string, any> = {},
   explicitEventId?: string
 ): string {
+  // BLOQUEIO RIGOROSO: O evento "Purchase" NUNCA pode ser disparado pelo site.
+  // O Purchase virá exclusivamente da Tutora após a confirmação do pagamento.
+  if (!eventName || eventName.toLowerCase() === 'purchase') {
+    console.warn('[Meta Tracking] Disparo de "Purchase" bloqueado no site. O evento Purchase é gerido exclusivamente pela Tutora.');
+    return '';
+  }
+
+  // Apenas estes 3 eventos são permitidos pelo site
+  const ALLOWED_SITE_EVENTS = ['PageView', 'ViewContent', 'InitiateCheckout'];
+  if (!ALLOWED_SITE_EVENTS.includes(eventName)) {
+    console.warn(`[Meta Tracking] Evento "${eventName}" não autorizado.`);
+    return '';
+  }
+
   const eventId = explicitEventId || `${eventName}_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
   const { fbc, fbp } = getMetaTrackingIds();
 
