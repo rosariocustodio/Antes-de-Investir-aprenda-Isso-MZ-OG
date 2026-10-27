@@ -244,10 +244,13 @@ export function trackMetaEvent(
 
   // 2. Disparar no Meta Conversions API (Servidor)
   try {
+    const isProdDomain = typeof window !== 'undefined' && window.location.hostname.includes('rumoseguros.site');
+    const sourceUrl = isProdDomain ? window.location.href : 'https://www.rumoseguros.site/';
+
     const payload = {
       event_name: eventName,
       event_id: eventId,
-      event_source_url: typeof window !== 'undefined' ? window.location.href : 'https://www.rumoseguros.site/',
+      event_source_url: sourceUrl,
       fbp,
       fbc,
       custom_data: Object.keys(customData).length > 0 ? customData : undefined

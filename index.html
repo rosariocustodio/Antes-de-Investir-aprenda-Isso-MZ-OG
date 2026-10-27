@@ -239,6 +239,10 @@
         if (fbpVal) pageViewOptions.fbp = fbpVal;
         fbq('track', 'PageView', {}, pageViewOptions);
 
+        var pageSourceUrl = (window.location.hostname && window.location.hostname.indexOf('rumoseguros.site') !== -1)
+          ? window.location.href
+          : 'https://www.rumoseguros.site/';
+
         // Disparo Server-side Meta Conversions API (CAPI) com o mesmo event_id para deduplicação
         try {
           fetch('/api/meta-events', {
@@ -247,7 +251,7 @@
             body: JSON.stringify({
               event_name: 'PageView',
               event_id: window.__initialPageViewId,
-              event_source_url: window.location.href,
+              event_source_url: pageSourceUrl,
               fbp: fbpVal,
               fbc: fbcVal
             }),

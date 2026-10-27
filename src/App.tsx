@@ -193,6 +193,17 @@ export const App: React.FC = () => {
     };
   }, []);
 
+  // Disparo do ViewContent ao visualizar o produto (livro) na página oficial
+  useEffect(() => {
+    trackMetaEvent('ViewContent', {
+      content_name: 'Antes de Investir, Aprenda Isto',
+      content_category: 'E-book / Finanças',
+      content_type: 'product',
+      value: 299.00,
+      currency: 'MZN'
+    });
+  }, []);
+
   const handleBuyClick = (e?: React.MouseEvent) => {
     // Disparo garantido com 100% de cobertura de fbc e fbp (Pixel + CAPI)
     trackMetaEvent('InitiateCheckout', {
@@ -216,13 +227,6 @@ export const App: React.FC = () => {
 
   const handleOpenPreview = () => {
     setIsPreviewOpen(true);
-    // Disparo garantido com 100% de cobertura de fbc e fbp (Pixel + CAPI)
-    trackMetaEvent('ViewContent', {
-      content_name: 'Amostra Oficial • Capítulo I',
-      content_category: 'E-book / Finanças',
-      value: 299.00,
-      currency: 'MZN'
-    });
   };
 
   return (

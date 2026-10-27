@@ -92,13 +92,18 @@ app.post('/api/meta-events', async (req, res) => {
       res.setHeader('Set-Cookie', cookieHeaders);
     } catch (e) {}
 
+    let sanitizedSourceUrl = event_source_url || (req.headers.referer as string) || 'https://www.rumoseguros.site/';
+    if (sanitizedSourceUrl.includes('run.app') || sanitizedSourceUrl.includes('localhost') || sanitizedSourceUrl.includes('127.0.0.1')) {
+      sanitizedSourceUrl = 'https://www.rumoseguros.site/';
+    }
+
     const payload = {
       data: [
         {
           event_name: targetEventName,
           event_time: Math.floor(Date.now() / 1000),
           event_id: event_id || `capi_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
-          event_source_url: event_source_url || req.headers.referer || 'https://rumoseguros.site',
+          event_source_url: sanitizedSourceUrl,
           action_source: 'website',
           user_data: {
             client_ip_address: ip,
