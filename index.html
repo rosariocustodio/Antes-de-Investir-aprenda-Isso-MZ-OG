@@ -155,137 +155,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
     
-    <!-- Meta Pixel Code & Anti-Purchase Network Shield -->
+    <!-- Meta Pixel Code -->
     <script>
       (function() {
-        // ESCUDO DE REDE TOTAL CONTRA COMPRAS FALSAS (Network-Level Anti-Purchase Shield v2)
-        // Bloqueia qualquer transmissão física que tente enviar "Purchase" ou a regra 941690622062856 para a Meta
-        function isBlockedPurchasePayload(targetUrl, payloadData) {
-          try {
-            var fullPayload = '' + (targetUrl || '');
-            if (payloadData) {
-              if (typeof payloadData === 'string') {
-                fullPayload += ' ' + payloadData;
-              } else if (window.FormData && payloadData instanceof FormData) {
-                payloadData.forEach(function(val, key) {
-                  fullPayload += ' ' + key + '=' + val;
-                });
-              } else if (window.URLSearchParams && payloadData instanceof URLSearchParams) {
-                fullPayload += ' ' + payloadData.toString();
-              } else if (typeof payloadData === 'object') {
-                try {
-                  fullPayload += ' ' + JSON.stringify(payloadData);
-                } catch(e) {}
-              }
-            }
-
-            try {
-              fullPayload += ' ' + decodeURIComponent(fullPayload);
-            } catch(e) {}
-
-            if (fullPayload.indexOf('Purchase') !== -1 || 
-                fullPayload.indexOf('purchase') !== -1 || 
-                fullPayload.indexOf('941690622062856') !== -1 ||
-                fullPayload.indexOf('1093528840338376') !== -1) {
-              return true;
-            }
-          } catch(e) {}
-          return false;
-        }
-
-        // 1. Intercetar Image (Meta Pixel usa new Image().src como transporte principal)
-        try {
-          var imageDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
-          if (imageDesc && imageDesc.set) {
-            var rawImageSet = imageDesc.set;
-            Object.defineProperty(HTMLImageElement.prototype, 'src', {
-              set: function(val) {
-                if (isBlockedPurchasePayload(val)) {
-                  console.warn('[Shield] Transmissão de pixel Purchase bloqueada na raiz.');
-                  return;
-                }
-                return rawImageSet.call(this, val);
-              },
-              get: imageDesc.get,
-              configurable: true,
-              enumerable: true
-            });
-          }
-
-          // Intercetar também via document.createElement('img')
-          var rawCreateElement = document.createElement;
-          document.createElement = function(tagName) {
-            var el = rawCreateElement.apply(document, arguments);
-            if (tagName && tagName.toLowerCase() === 'img') {
-              var localSrc = '';
-              try {
-                Object.defineProperty(el, 'src', {
-                  set: function(val) {
-                    if (isBlockedPurchasePayload(val)) {
-                      console.warn('[Shield] Imagem createElement Purchase bloqueada.');
-                      return;
-                    }
-                    localSrc = val;
-                    el.setAttribute('src', val);
-                  },
-                  get: function() { return localSrc; },
-                  configurable: true
-                });
-              } catch(e) {}
-            }
-            return el;
-          };
-        } catch(e) {}
-
-        // 2. Intercetar navigator.sendBeacon (com suporte para FormData)
-        try {
-          if (navigator && navigator.sendBeacon) {
-            var rawSendBeacon = navigator.sendBeacon;
-            navigator.sendBeacon = function(url, data) {
-              if (isBlockedPurchasePayload(url, data)) {
-                console.warn('[Shield] sendBeacon Purchase bloqueado na raiz.');
-                return true;
-              }
-              return rawSendBeacon.apply(navigator, arguments);
-            };
-          }
-        } catch(e) {}
-
-        // 3. Intercetar window.fetch (com suporte para FormData)
-        try {
-          if (window.fetch) {
-            var rawFetch = window.fetch;
-            window.fetch = function(input, init) {
-              var url = typeof input === 'string' ? input : (input && input.url ? input.url : '');
-              var body = init && init.body ? init.body : null;
-              if (isBlockedPurchasePayload(url, body)) {
-                console.warn('[Shield] fetch Purchase bloqueado na raiz.');
-                return Promise.resolve(new Response(JSON.stringify({ status: 'blocked' }), { status: 200 }));
-              }
-              return rawFetch.apply(window, arguments);
-            };
-          }
-        } catch(e) {}
-
-        // 4. Intercetar XMLHttpRequest (com suporte para FormData)
-        try {
-          if (window.XMLHttpRequest) {
-            var rawOpen = XMLHttpRequest.prototype.open;
-            var rawSend = XMLHttpRequest.prototype.send;
-            XMLHttpRequest.prototype.open = function(method, url) {
-              this.__reqUrl = url;
-              return rawOpen.apply(this, arguments);
-            };
-            XMLHttpRequest.prototype.send = function(body) {
-              if (isBlockedPurchasePayload(this.__reqUrl, body)) {
-                console.warn('[Shield] XHR Purchase bloqueado na raiz.');
-                return;
-              }
-              return rawSend.apply(this, arguments);
-            };
-          }
-        } catch(e) {}
-
         var host = window.location.hostname;
         if (host.includes('aistudio.google.com')) {
           return;
@@ -318,7 +190,6 @@
               sessionStorage.setItem('_fbc', fbcVal);
             } catch(e) {}
           } else {
-            // Tentar recuperar do cookie ou localStorage existente
             try {
               var m = document.cookie.match(/(^|;\s*)_fbc=([^;]*)/);
               if (m && m[2]) {
@@ -360,23 +231,6 @@
         // Desativar autoConfig e regras automáticas da Meta (Event Setup Tool / ob3)
         fbq('set', 'autoConfig', false, '1433052258793282');
 
-        // Intercetar e bloquear categoricamente qualquer disparo de "Purchase" no navegador
-        var nativeFbq = window.fbq;
-        var protectedFbq = function() {
-          var args = Array.prototype.slice.call(arguments);
-          if (args[0] === 'track' && (args[1] === 'Purchase' || (typeof args[1] === 'string' && args[1].toLowerCase() === 'purchase'))) {
-            console.warn('[Meta Security] Disparo automático de Purchase bloqueado com sucesso no navegador.');
-            return;
-          }
-          return nativeFbq.apply(window, args);
-        };
-        for (var key in nativeFbq) {
-          if (Object.prototype.hasOwnProperty.call(nativeFbq, key)) {
-            protectedFbq[key] = nativeFbq[key];
-          }
-        }
-        window.fbq = protectedFbq;
-
         window.__initialPageViewId = 'PageView_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
         fbq('init', '1433052258793282');
         
@@ -385,7 +239,7 @@
         if (fbpVal) pageViewOptions.fbp = fbpVal;
         fbq('track', 'PageView', {}, pageViewOptions);
 
-        // Disparo Server-side Meta Conversions API (CAPI) com fbc e fbp garantidos
+        // Disparo Server-side Meta Conversions API (CAPI) com o mesmo event_id para deduplicação
         try {
           fetch('/api/meta-events', {
             method: 'POST',
