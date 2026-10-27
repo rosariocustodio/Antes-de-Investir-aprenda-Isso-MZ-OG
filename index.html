@@ -97,7 +97,7 @@
             "price": "299.00",
             "priceCurrency": "MZN",
             "availability": "https://schema.org/InStock",
-            "url": "https://chk.eduzz.com/2643806",
+            "url": "https://pay.tutora.co.mz/62a05cf77fa54880af65ef714f9d7be6",
             "priceValidUntil": "2026-12-31"
           }
         },
@@ -158,23 +158,36 @@
     <!-- Meta Pixel Code & Anti-Purchase Network Shield -->
     <script>
       (function() {
-        // ESCUDO DE REDE TOTAL CONTRA COMPRAS FALSAS (Network-Level Anti-Purchase Shield)
+        // ESCUDO DE REDE TOTAL CONTRA COMPRAS FALSAS (Network-Level Anti-Purchase Shield v2)
         // Bloqueia qualquer transmissão física que tente enviar "Purchase" ou a regra 941690622062856 para a Meta
         function isBlockedPurchasePayload(targetUrl, payloadData) {
           try {
             var fullPayload = '' + (targetUrl || '');
             if (payloadData) {
-              if (typeof payloadData === 'string') fullPayload += ' ' + payloadData;
-              else if (typeof payloadData === 'object') {
-                try { fullPayload += ' ' + JSON.stringify(payloadData); } catch(e) {}
+              if (typeof payloadData === 'string') {
+                fullPayload += ' ' + payloadData;
+              } else if (window.FormData && payloadData instanceof FormData) {
+                payloadData.forEach(function(val, key) {
+                  fullPayload += ' ' + key + '=' + val;
+                });
+              } else if (window.URLSearchParams && payloadData instanceof URLSearchParams) {
+                fullPayload += ' ' + payloadData.toString();
+              } else if (typeof payloadData === 'object') {
+                try {
+                  fullPayload += ' ' + JSON.stringify(payloadData);
+                } catch(e) {}
               }
             }
-            if (fullPayload.indexOf('facebook.com/tr') !== -1 || fullPayload.indexOf('/tr/') !== -1) {
-              if (fullPayload.indexOf('Purchase') !== -1 || 
-                  fullPayload.indexOf('purchase') !== -1 || 
-                  fullPayload.indexOf('941690622062856') !== -1) {
-                return true;
-              }
+
+            try {
+              fullPayload += ' ' + decodeURIComponent(fullPayload);
+            } catch(e) {}
+
+            if (fullPayload.indexOf('Purchase') !== -1 || 
+                fullPayload.indexOf('purchase') !== -1 || 
+                fullPayload.indexOf('941690622062856') !== -1 ||
+                fullPayload.indexOf('1093528840338376') !== -1) {
+              return true;
             }
           } catch(e) {}
           return false;
@@ -198,9 +211,33 @@
               enumerable: true
             });
           }
+
+          // Intercetar também via document.createElement('img')
+          var rawCreateElement = document.createElement;
+          document.createElement = function(tagName) {
+            var el = rawCreateElement.apply(document, arguments);
+            if (tagName && tagName.toLowerCase() === 'img') {
+              var localSrc = '';
+              try {
+                Object.defineProperty(el, 'src', {
+                  set: function(val) {
+                    if (isBlockedPurchasePayload(val)) {
+                      console.warn('[Shield] Imagem createElement Purchase bloqueada.');
+                      return;
+                    }
+                    localSrc = val;
+                    el.setAttribute('src', val);
+                  },
+                  get: function() { return localSrc; },
+                  configurable: true
+                });
+              } catch(e) {}
+            }
+            return el;
+          };
         } catch(e) {}
 
-        // 2. Intercetar navigator.sendBeacon
+        // 2. Intercetar navigator.sendBeacon (com suporte para FormData)
         try {
           if (navigator && navigator.sendBeacon) {
             var rawSendBeacon = navigator.sendBeacon;
@@ -214,7 +251,7 @@
           }
         } catch(e) {}
 
-        // 3. Intercetar window.fetch
+        // 3. Intercetar window.fetch (com suporte para FormData)
         try {
           if (window.fetch) {
             var rawFetch = window.fetch;
@@ -230,7 +267,7 @@
           }
         } catch(e) {}
 
-        // 4. Intercetar XMLHttpRequest
+        // 4. Intercetar XMLHttpRequest (com suporte para FormData)
         try {
           if (window.XMLHttpRequest) {
             var rawOpen = XMLHttpRequest.prototype.open;

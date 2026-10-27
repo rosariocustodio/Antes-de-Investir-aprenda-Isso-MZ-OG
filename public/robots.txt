@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.rumoseguros.site/sitemap.xml
-Sitemap: https://rumoseguros.site/sitemap.xml

@@ -204,8 +204,9 @@ export const App: React.FC = () => {
 
     const targetUrl = attachTrackingToUrl(CHECKOUT_URL);
 
-    // Se o clique veio de um elemento que não é um link com target _blank (ex: click no mockup):
-    if (!e || !(e.currentTarget instanceof HTMLAnchorElement)) {
+    if (e && e.currentTarget instanceof HTMLAnchorElement) {
+      e.currentTarget.href = targetUrl;
+    } else {
       const opened = window.open(targetUrl, '_blank', 'noopener,noreferrer');
       if (!opened || opened.closed || typeof opened.closed === 'undefined') {
         window.location.href = targetUrl;

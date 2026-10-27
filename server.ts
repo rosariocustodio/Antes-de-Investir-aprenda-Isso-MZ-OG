@@ -11,7 +11,9 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 const META_PIXEL_ID = process.env.META_PIXEL_ID || '1433052258793282';
-const META_CAPI_ACCESS_TOKEN = process.env.META_CAPI_ACCESS_TOKEN;
+const META_CAPI_ACCESS_TOKEN =
+  process.env.META_CAPI_ACCESS_TOKEN ||
+  'EAAOlEKz9hnQBSZCZC4KqwT80cZCluYbbbNZA12Td6QElHPA3W8zMMmZBIDwWzxFpteXmwToBuZAMdx0MM0ZCnm2XULlwZB9ecRwjw2Xlas7n7GuZBPnqqZChwZCcSp5ZAyISQ8BZBjXdhiQZBImG0DM74l6sj6Ds8MOIekNZCExwyTDYBP5mgVl9oUHLWMHwEswve7lGwZDZD';
 
 app.use(express.json());
 
