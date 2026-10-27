@@ -229,6 +229,26 @@
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
         
+        // Desativar autoConfig e regras automáticas da Meta (Event Setup Tool / ob3)
+        fbq('set', 'autoConfig', false, '1433052258793282');
+
+        // Intercetar e bloquear categoricamente qualquer disparo de "Purchase" no navegador
+        var nativeFbq = window.fbq;
+        var protectedFbq = function() {
+          var args = Array.prototype.slice.call(arguments);
+          if (args[0] === 'track' && (args[1] === 'Purchase' || (typeof args[1] === 'string' && args[1].toLowerCase() === 'purchase'))) {
+            console.warn('[Meta Security] Disparo automático de Purchase bloqueado com sucesso no navegador.');
+            return;
+          }
+          return nativeFbq.apply(window, args);
+        };
+        for (var key in nativeFbq) {
+          if (Object.prototype.hasOwnProperty.call(nativeFbq, key)) {
+            protectedFbq[key] = nativeFbq[key];
+          }
+        }
+        window.fbq = protectedFbq;
+
         window.__initialPageViewId = 'PageView_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
         fbq('init', '1433052258793282');
         
