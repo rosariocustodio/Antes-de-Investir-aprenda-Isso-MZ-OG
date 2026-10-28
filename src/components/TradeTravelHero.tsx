@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookMockup } from './BookMockup';
 import { RumosSegurosLogo } from './RumosSegurosLogo';
-import { CHECKOUT_URL } from '../config/checkout';
+import { CtaButton } from './CtaButton';
 
 interface TradeTravelHeroProps {
   onOrderClick: (e?: React.MouseEvent) => void;
@@ -13,7 +13,11 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
   onPreviewClick,
 }) => {
   return (
-    <section className="relative w-full bg-[#2C0A29] text-[#F8F4EE] pt-7 sm:pt-9 md:pt-12 pb-14 sm:pb-16 md:pb-20 px-5 sm:px-8 lg:px-12 border-b border-white/10 overflow-hidden">
+    <section 
+      id="hero" 
+      data-section-theme="dark"
+      className="relative w-full bg-[#2C0A29] text-[#F8F4EE] pt-7 sm:pt-9 md:pt-12 pb-14 sm:pb-16 md:pb-20 px-5 sm:px-8 lg:px-12 border-b border-white/10 overflow-hidden"
+    >
       
       {/* Vinheta atmosférica profunda e sóbria */}
       <div 
@@ -59,23 +63,13 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
 
             {/* Bloco de CTA e Garantias */}
             <div className="w-full max-w-[340px] flex flex-col items-center md:items-start">
-              <a
-                href={CHECKOUT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <CtaButton
                 id="hero-order-book-btn"
+                variant="dark-section"
+                size="lg"
                 onClick={onOrderClick}
-                className="relative group overflow-hidden w-full min-h-[50px] sm:min-h-[52px] font-button font-bold text-[12.5px] sm:text-[13px] text-[#22051E] tracking-[0.18em] uppercase bg-gradient-to-r from-[#C59B3F] via-[#E8CB85] to-[#B88B32] hover:from-[#D4AF4A] hover:via-[#F0D695] hover:to-[#C6983A] border border-[#F5DC9E]/80 rounded-xl py-3.5 px-6 inline-flex items-center justify-center text-center transition-all duration-300 cursor-pointer shadow-[0_4px_22px_rgba(197,155,63,0.32)] hover:shadow-[0_6px_28px_rgba(212,175,55,0.45)] active:scale-[0.98]"
-              >
-                {/* Feixe de luz brilhando passando (Shimmer Premium) */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl" aria-hidden="true">
-                  <div className="absolute top-0 bottom-0 w-28 bg-gradient-to-r from-transparent via-white/65 to-transparent animate-shimmer-sweep" />
-                </div>
-
-                <span className="relative z-10 flex items-center justify-center">
-                  QUERO O MEU EXEMPLAR
-                </span>
-              </a>
+                className="w-full"
+              />
 
               {/* Linha discreta de segurança e transparência */}
               <div className="w-full flex items-center justify-center md:justify-start gap-2 text-[10.5px] sm:text-[11px] text-white/60 font-content mt-3.5 select-none tracking-normal">

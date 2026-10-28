@@ -1,5 +1,5 @@
 import React from 'react';
-import { CHECKOUT_URL } from '../config/checkout';
+import { CtaButton } from './CtaButton';
 
 interface AuthorStorySectionProps {
   onOrderClick: (e?: React.MouseEvent) => void;
@@ -7,7 +7,11 @@ interface AuthorStorySectionProps {
 
 export const AuthorStorySection: React.FC<AuthorStorySectionProps> = ({ onOrderClick }) => {
   return (
-    <section className="pt-10 pb-12 sm:pt-14 sm:pb-16 bg-[#FDF5F2] text-[#0E0E0D] px-5 sm:px-8 lg:px-12">
+    <section 
+      id="autor"
+      data-section-theme="light"
+      className="pt-10 pb-12 sm:pt-14 sm:pb-16 bg-[#FDF5F2] text-[#0E0E0D] px-5 sm:px-8 lg:px-12"
+    >
       <div className="max-w-[760px] mx-auto text-left">
         
         {/* Subtle top divider with diamond symbol exactly matching Screenshot 3 & 4 */}
@@ -77,15 +81,12 @@ export const AuthorStorySection: React.FC<AuthorStorySectionProps> = ({ onOrderC
 
           {/* Button matching Screenshot 5 */}
           <div className="w-full flex justify-center pt-2 pb-4">
-            <a
-              href={CHECKOUT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <CtaButton
+              variant="light-section"
+              size="md"
               onClick={onOrderClick}
-              className="w-full max-w-[340px] min-h-[48px] font-button font-medium text-[12px] sm:text-[12.5px] text-[#2C0A29] tracking-[0.18em] uppercase bg-transparent border border-[#2C0A29] rounded-none py-3.5 inline-flex items-center justify-center transition-all duration-200 hover:bg-[#2C0A29] hover:text-white cursor-pointer shadow-sm active:scale-[0.99]"
-            >
-              QUERO O MEU EXEMPLAR
-            </a>
+              className="w-full max-w-[340px]"
+            />
           </div>
         </div>
 

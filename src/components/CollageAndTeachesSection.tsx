@@ -1,5 +1,5 @@
 import React from 'react';
-import { CHECKOUT_URL } from '../config/checkout';
+import { CtaButton } from './CtaButton';
 
 interface CollageAndTeachesSectionProps {
   onOrderClick?: (e?: React.MouseEvent) => void;
@@ -9,7 +9,11 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
   onOrderClick,
 }) => {
   return (
-    <section className="bg-[#FDF5F2] text-[#0E0E0D] pt-8 pb-5 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 px-5 sm:px-8 lg:px-12 border-t border-[#E4DAD9]">
+    <section 
+      id="conteudo"
+      data-section-theme="light"
+      className="bg-[#FDF5F2] text-[#0E0E0D] pt-8 pb-5 sm:pt-10 sm:pb-6 md:pt-12 md:pb-8 px-5 sm:px-8 lg:px-12 border-t border-[#E4DAD9]"
+    >
       <div className="max-w-[1140px] mx-auto w-full">
         
         {/* 2-Column Grid matching desktop and mobile flow */}
@@ -167,15 +171,12 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
             {/* Action Button */}
             {onOrderClick && (
               <div className="w-full sm:w-auto flex justify-center sm:justify-start">
-                <a
-                  href={CHECKOUT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <CtaButton
+                  variant="light-section"
+                  size="md"
                   onClick={onOrderClick}
-                  className="w-full max-w-[320px] sm:w-auto min-h-[46px] font-button font-medium text-[12px] sm:text-[13px] text-[#360A2F] tracking-[0.2em] uppercase bg-transparent border border-[#360A2F]/90 rounded-none px-7 sm:px-8 py-3 sm:py-3.5 inline-flex items-center justify-center transition-all duration-200 hover:bg-[#360A2F] hover:text-white active:bg-[#360A2F]/10 cursor-pointer shadow-sm active:scale-[0.99]"
-                >
-                  QUERO O MEU EXEMPLAR
-                </a>
+                  className="w-full max-w-[320px] sm:w-auto"
+                />
               </div>
             )}
 

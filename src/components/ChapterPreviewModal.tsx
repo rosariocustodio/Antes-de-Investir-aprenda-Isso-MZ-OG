@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { X, ArrowDown, FileText, CheckCircle2 } from 'lucide-react';
+import { X, FileText, CheckCircle2 } from 'lucide-react';
 import { CHECKOUT_URL } from '../config/checkout';
+import { CtaButton } from './CtaButton';
 
 interface ChapterPreviewModalProps {
   isOpen: boolean;
@@ -254,15 +255,14 @@ export const ChapterPreviewModal: React.FC<ChapterPreviewModalProps> = ({
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a
-                  href={CHECKOUT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <CtaButton
+                  variant="light-section"
+                  size="md"
                   onClick={onBuyClick}
-                  className="w-full sm:w-auto font-sans font-semibold text-[13px] text-white bg-[#801869] hover:bg-[#681355] px-7 py-3 rounded-none shadow transition-colors text-center uppercase tracking-wider"
+                  className="w-full sm:w-auto"
                 >
                   Obter Exemplar Completo — 299 MT
-                </a>
+                </CtaButton>
 
                 <span className="font-sans text-[11.5px] text-neutral-500">
                   Pagamento por M-Pesa, e-Mola ou Cartão • Envio imediato

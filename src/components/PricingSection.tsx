@@ -1,5 +1,5 @@
 import React from 'react';
-import { CHECKOUT_URL } from '../config/checkout';
+import { CtaButton } from './CtaButton';
 
 interface PricingSectionProps {
   onOrderClick: (e?: React.MouseEvent) => void;
@@ -9,6 +9,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOrderClick }) 
   return (
     <section 
       id="preco" 
+      data-section-theme="light"
       aria-label="Preço e Valor"
       className="py-12 sm:py-16 md:py-20 bg-[#FDF5F2] text-[#0E0E0D] px-5 sm:px-8 lg:px-12 border-b border-[#E4DAD9]"
     >
@@ -77,15 +78,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOrderClick }) 
           </p>
 
           {/* Botão de ação com tracking do checkout */}
-          <a
-            href={CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <CtaButton
+            variant="light-section"
+            size="md"
             onClick={onOrderClick}
-            className="w-full max-w-[320px] min-h-[48px] font-button font-medium text-[12px] sm:text-[13px] text-[#360A2F] tracking-[0.2em] uppercase bg-transparent border border-[#360A2F]/90 rounded-none px-7 py-3.5 inline-flex items-center justify-center transition-all duration-200 hover:bg-[#360A2F] hover:text-white active:bg-[#360A2F]/10 cursor-pointer shadow-sm active:scale-[0.99]"
-          >
-            QUERO O MEU EXEMPLAR
-          </a>
+            className="w-full max-w-[320px]"
+          />
         </div>
 
       </div>

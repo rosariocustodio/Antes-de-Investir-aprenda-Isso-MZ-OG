@@ -6,7 +6,11 @@ export const FAQSection: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-12 sm:py-14 md:py-16 bg-[#EBE3DE] text-[#0E0E0D] px-5 sm:px-8 lg:px-12 border-t border-b border-[#D8CDC8]">
+    <section 
+      id="faq" 
+      data-section-theme="light"
+      className="py-12 sm:py-14 md:py-16 bg-[#EBE3DE] text-[#0E0E0D] px-5 sm:px-8 lg:px-12 border-t border-b border-[#D8CDC8]"
+    >
       <div className="max-w-[760px] mx-auto text-center">
         
         {/* Section H2 Title matching Screenshot 6 */}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { RumosSegurosLogo } from './RumosSegurosLogo';
 import { BookMockup } from './BookMockup';
-import { CHECKOUT_URL } from '../config/checkout';
+import { CtaButton } from './CtaButton';
 
 interface TradeTravelFooterProps {
   onOrderClick: (e?: React.MouseEvent) => void;
@@ -9,7 +9,11 @@ interface TradeTravelFooterProps {
 
 export const TradeTravelFooter: React.FC<TradeTravelFooterProps> = ({ onOrderClick }) => {
   return (
-    <footer className="bg-[#2C0A29] text-[#F8F4EE] pt-12 sm:pt-16 pb-28 sm:pb-16 px-5 sm:px-8 border-t border-white/10 overflow-hidden">
+    <footer 
+      id="footer"
+      data-section-theme="dark"
+      className="bg-[#2C0A29] text-[#F8F4EE] pt-12 sm:pt-16 pb-28 sm:pb-16 px-5 sm:px-8 border-t border-white/10 overflow-hidden"
+    >
       <div className="max-w-[720px] mx-auto text-center flex flex-col items-center space-y-6 sm:space-y-7">
         
         {/* Logótipo Rumos Seguros */}
@@ -39,15 +43,12 @@ export const TradeTravelFooter: React.FC<TradeTravelFooterProps> = ({ onOrderCli
 
         {/* Botão de Ação Principal */}
         <div className="w-full flex flex-col items-center gap-3 pt-1">
-          <a
-            href={CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <CtaButton
+            variant="dark-section"
+            size="lg"
             onClick={onOrderClick}
-            className="w-full max-w-[340px] min-h-[50px] font-button font-medium text-[12.5px] sm:text-[13px] text-white tracking-[0.2em] uppercase bg-transparent border border-white/90 rounded-none py-3.5 inline-flex items-center justify-center text-center transition-all duration-200 hover:bg-white hover:text-[#2C0A29] cursor-pointer shadow-md active:scale-[0.99]"
-          >
-            QUERO O MEU EXEMPLAR
-          </a>
+            className="w-full max-w-[340px]"
+          />
 
           <p className="font-content font-medium text-[11px] text-[#F8F4EE]/65 tracking-[0.2em] uppercase select-none">
             EDIÇÃO OFICIAL • DISPONÍVEL EM MOÇAMBIQUE
