@@ -34,16 +34,16 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
           {/* Coluna de Texto e Ação */}
           <div className="md:col-span-7 text-center md:text-left flex flex-col items-center md:items-start">
 
-            {/* Título Principal H1 */}
-            <h1 className="font-headline font-normal text-white text-[32px] xs:text-[36px] sm:text-[42px] md:text-[46px] lg:text-[52px] leading-[1.12] tracking-[-0.015em] mb-4 sm:mb-5 max-w-[620px]">
-              Ganhar Dinheiro Custa. <br className="hidden sm:inline" />
-              <span className="text-[#F8F4EE]">Aprenda a Não o Perder.</span>
+            {/* Título Principal H1 - Opção 3 */}
+            <h1 className="font-headline font-normal text-white text-[30px] xs:text-[34px] sm:text-[40px] md:text-[44px] lg:text-[48px] leading-[1.16] tracking-[-0.015em] mb-4 sm:mb-5 max-w-[640px]">
+              O seu salário deve construir o seu futuro — <br className="hidden sm:inline" />
+              <span className="text-[#F8F4EE]">não apenas pagar contas do mês.</span>
             </h1>
 
-            {/* Subtítulo com clareza e ritmo editorial */}
-            <p className="font-content text-[#F8F4EE]/85 font-normal text-[15px] sm:text-[16.5px] md:text-[17.5px] leading-[1.6] mb-7 sm:mb-8 max-w-[530px]">
-              O guia prático para proteger o dinheiro que já tem, e aprender a fazê-lo crescer —{' '}
-              <span className="text-white font-medium">antes de dar o próximo passo.</span>
+            {/* Subtítulo com clareza, relevância local e ritmo editorial */}
+            <p className="font-content text-[#F8F4EE]/85 font-normal text-[15px] sm:text-[16.5px] md:text-[17px] leading-[1.62] mb-7 sm:mb-8 max-w-[560px]">
+              Aprenda a dominar o seu orçamento diário, eliminar vazamentos e construir um património seguro para a sua família em Moçambique,{' '}
+              <span className="text-white font-medium">sem atalhos arriscados.</span>
             </p>
 
             {/* Bloco de CTA e Garantias (agora imediatamente visível no ecrã inicial do telemóvel) */}
