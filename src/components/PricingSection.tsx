@@ -40,13 +40,19 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOrderClick }) 
                 <picture className="w-full flex items-center justify-center">
                   <source srcSet="/pricing-mockup-reflected.webp" type="image/webp" />
                   <img
-                    src="/pricing-mockup-reflected.png"
+                    src="/pricing-mockup-reflected.webp"
                     alt="Antes de Investir, Aprenda Isto - Rosario Paulino"
-                    width="779"
-                    height="1584"
+                    width="400"
+                    height="813"
                     loading="lazy"
                     decoding="async"
                     className="w-full h-auto object-contain block select-none pointer-events-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-transform duration-300 group-hover:scale-[1.02]"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      if (!target.src.includes('pricing-mockup-reflected.png')) {
+                        target.src = '/pricing-mockup-reflected.png';
+                      }
+                    }}
                   />
                 </picture>
               </div>
@@ -61,7 +67,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOrderClick }) 
           </div>
 
           {/* Valor atual em destaque */}
-          <div className="font-headline font-normal text-[#360A2F] text-[34px] sm:text-[42px] leading-tight tracking-tight mb-2">
+          <div className="font-headline font-bold text-[#360A2F] text-[34px] sm:text-[42px] leading-tight tracking-tight mb-2">
             Por apenas 299 MT
           </div>
 

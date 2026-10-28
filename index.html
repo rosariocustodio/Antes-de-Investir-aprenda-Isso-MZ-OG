@@ -143,17 +143,28 @@
     }
     </script>
     
-    <!-- Preload Critical Images for Instant Loading -->
-    <link rel="preload" as="image" href="/mockup principal.webp" type="image/webp" fetchpriority="high" />
-    <link rel="preload" as="image" href="/imagem3.webp" type="image/webp" fetchpriority="high" />
-    <link rel="preload" as="image" href="/imagem1.webp" type="image/webp" />
-    <link rel="preload" as="image" href="/imagem2.webp" type="image/webp" />
-    <link rel="preload" as="image" href="/moderno-autor.webp" type="image/webp" />
+    <!-- DNS Prefetch & Preconnect for Fast Resolution on Slow Networks -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://pay.tutora.co.mz" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://pay.tutora.co.mz" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- Preload ONLY Critical Above-the-Fold Hero Image (Saves 2.5MB upfront bandwidth on 2G/3G) -->
+    <link rel="preload" as="image" href="/mockup principal.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Google Fonts: Plus Jakarta Sans (alta legibilidade e impacto) + DM Sans com display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+    
+    <!-- Service Worker Registration for Instant Loading & Offline Caching on Slow Networks -->
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function() {});
+        });
+      }
+    </script>
     
     <!-- Meta Pixel Code -->
     <script>

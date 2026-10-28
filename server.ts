@@ -143,6 +143,13 @@ async function startServer() {
   const { createServer: createHttpServer } = await import('http');
   const httpServer = createHttpServer(app);
 
+  // Cabeçalho de autorização e controlo do Service Worker
+  app.get('/sw.js', (req, res, next) => {
+    res.setHeader('Service-Worker-Allowed', '/');
+    res.setHeader('Cache-Control', 'no-cache');
+    next();
+  });
+
   if (!isProduction) {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
@@ -168,7 +175,17 @@ async function startServer() {
       }
     });
   } else {
-    app.use(express.static(path.resolve(__dirname, 'dist')));
+    app.use(
+      express.static(path.resolve(__dirname, 'dist'), {
+        maxAge: '1y',
+        immutable: true,
+        setHeaders: (res, filePath) => {
+          if (filePath.endsWith('.html') || filePath.endsWith('sw.js')) {
+            res.setHeader('Cache-Control', 'no-cache');
+          }
+        }
+      })
+    );
     app.use((_req, res) => {
       res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
     });

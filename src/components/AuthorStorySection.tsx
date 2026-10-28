@@ -22,7 +22,7 @@ export const AuthorStorySection: React.FC<AuthorStorySectionProps> = ({ onOrderC
           <p className="font-content font-medium text-[11px] sm:text-[12px] tracking-[0.22em] uppercase text-[#360A2F] mb-1.5">
             CONHEÇA O AUTOR
           </p>
-          <h2 className="font-headline font-normal text-[#360A2F] text-[34px] sm:text-[42px] leading-tight tracking-tight">
+          <h2 className="font-headline font-bold text-[#360A2F] text-[34px] sm:text-[42px] leading-tight tracking-tight">
             Rosario Paulino
           </h2>
           <p className="font-content text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-[#360A2F]/75 font-medium mt-1">
@@ -37,10 +37,11 @@ export const AuthorStorySection: React.FC<AuthorStorySectionProps> = ({ onOrderC
             <img
               src="/moderno-autor.webp"
               alt="Rosario Paulino - Autor e Fundador da Rumos Seguros"
+              width="420"
+              height="420"
               className="w-full h-auto object-contain block select-none"
-              loading="eager"
-              fetchPriority="high"
-              decoding="sync"
+              loading="lazy"
+              decoding="async"
             />
           </picture>
           <div className="bg-[#2C0A29] py-2.5 px-4 text-center">

@@ -10,7 +10,7 @@ export const FAQSection: React.FC = () => {
       <div className="max-w-[760px] mx-auto text-center">
         
         {/* Section H2 Title matching Screenshot 6 */}
-        <h2 className="font-headline font-normal text-[#360A2F] text-[32px] sm:text-[38px] leading-[1.16] tracking-tight mb-8 sm:mb-10">
+        <h2 className="font-headline font-bold text-[#360A2F] text-[32px] sm:text-[38px] leading-[1.16] tracking-tight mb-8 sm:mb-10">
           Perguntas Frequentes
         </h2>
 
@@ -21,7 +21,7 @@ export const FAQSection: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                className="w-full text-left flex items-start justify-between gap-4 font-headline text-[17px] sm:text-[19px] text-[#360A2F] hover:opacity-80 transition-opacity cursor-pointer"
+                className="w-full text-left flex items-start justify-between gap-4 font-headline font-semibold text-[17px] sm:text-[19px] text-[#360A2F] hover:opacity-80 transition-opacity cursor-pointer"
               >
                 <div className="flex items-start gap-2.5 sm:gap-3">
                   <span className="font-content font-bold text-[11px] sm:text-[12px] tracking-wider text-[#360A2F]/70 shrink-0 mt-1">

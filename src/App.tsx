@@ -8,6 +8,7 @@ import { FAQSection } from './components/FAQSection';
 import { TradeTravelFooter } from './components/TradeTravelFooter';
 import { StickyBottomBar } from './components/StickyBottomBar';
 import { ChapterPreviewModal } from './components/ChapterPreviewModal';
+import { RevealOnScroll } from './components/RevealOnScroll';
 import { CHECKOUT_URL } from './config/checkout';
 import { trackMetaEvent, attachTrackingToUrl, getOrSetFbc, getOrSetFbp } from './utils/metaTracking';
 
@@ -238,27 +239,37 @@ export const App: React.FC = () => {
       />
 
       {/* 2. Colagem Editorial e o que o Método Ensina (Screenshots 2 e 3) */}
-      <CollageAndTeachesSection
-        onOrderClick={handleBuyClick}
-      />
+      <RevealOnScroll>
+        <CollageAndTeachesSection
+          onOrderClick={handleBuyClick}
+        />
+      </RevealOnScroll>
 
       {/* 3. Conheça o Autor Rosario Paulino (Screenshots 4 e 5) */}
-      <AuthorStorySection
-        onOrderClick={handleBuyClick}
-      />
+      <RevealOnScroll>
+        <AuthorStorySection
+          onOrderClick={handleBuyClick}
+        />
+      </RevealOnScroll>
 
       {/* 4. Preço & Investimento 299 MT (Screenshots 5 e 6) */}
-      <PricingSection
-        onOrderClick={handleBuyClick}
-      />
+      <RevealOnScroll>
+        <PricingSection
+          onOrderClick={handleBuyClick}
+        />
+      </RevealOnScroll>
 
       {/* 5. Perguntas Frequentes (Screenshots 6 e 7) */}
-      <FAQSection />
+      <RevealOnScroll>
+        <FAQSection />
+      </RevealOnScroll>
 
       {/* 6. Footer Oficial (Screenshots 7 e 8) */}
-      <TradeTravelFooter
-        onOrderClick={handleBuyClick}
-      />
+      <RevealOnScroll>
+        <TradeTravelFooter
+          onOrderClick={handleBuyClick}
+        />
+      </RevealOnScroll>
 
       {/* 7. Barra Fixa Inferior (Sticky Bar) */}
       <StickyBottomBar

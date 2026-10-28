@@ -34,19 +34,30 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
           {/* Coluna de Texto e Ação */}
           <div className="md:col-span-7 text-center md:text-left flex flex-col items-center md:items-start">
 
-            {/* Título Principal H1 - Opção 3 */}
-            <h1 className="font-headline font-normal text-white text-[30px] xs:text-[34px] sm:text-[40px] md:text-[44px] lg:text-[48px] leading-[1.16] tracking-[-0.015em] mb-4 sm:mb-5 max-w-[640px]">
+            {/* Título Principal H1 - Opção 3 com tipografia impactante, profissional e de fácil leitura */}
+            <h1 className="font-headline font-bold text-white text-[28px] xs:text-[32px] sm:text-[38px] md:text-[44px] lg:text-[48px] leading-[1.18] sm:leading-[1.14] tracking-[-0.02em] mb-4 sm:mb-5 max-w-[640px]">
               O seu salário deve construir o seu futuro — <br className="hidden sm:inline" />
-              <span className="text-[#F8F4EE]">não apenas pagar contas do mês.</span>
+              <span className="text-white">não apenas pagar contas do mês.</span>
             </h1>
 
-            {/* Subtítulo com clareza, relevância local e ritmo editorial */}
-            <p className="font-content text-[#F8F4EE]/85 font-normal text-[15px] sm:text-[16.5px] md:text-[17px] leading-[1.62] mb-7 sm:mb-8 max-w-[560px]">
-              Aprenda a dominar o seu orçamento diário, eliminar vazamentos e construir um património seguro para a sua família em Moçambique,{' '}
-              <span className="text-white font-medium">sem atalhos arriscados.</span>
+            {/* Subtítulo adaptado - Opção 5: conciso, nítido e em tamanho reduzido para não poluir */}
+            <p className="font-content text-[#F8F4EE]/90 font-normal text-[13.5px] xs:text-[14px] sm:text-[15px] md:text-[15.5px] leading-[1.55] sm:leading-[1.6] mb-5 sm:mb-6 md:mb-8 max-w-[520px]">
+              Pare de trabalhar apenas para pagar contas.{' '}
+              <span className="text-white font-medium">
+                Tenha um plano simples e comprovado para ver o seu dinheiro crescer de verdade.
+              </span>
             </p>
 
-            {/* Bloco de CTA e Garantias (agora imediatamente visível no ecrã inicial do telemóvel) */}
+            {/* Mockup do Livro no Mobile (estilo original book.tradeandtravel.com) */}
+            <div className="md:hidden w-full flex justify-center my-4 sm:my-6">
+              <BookMockup 
+                onPreviewClick={onPreviewClick} 
+                imageSrc="/mockup principal.webp" 
+                size="md" 
+              />
+            </div>
+
+            {/* Bloco de CTA e Garantias */}
             <div className="w-full max-w-[340px] flex flex-col items-center md:items-start">
               <a
                 href={CHECKOUT_URL}
@@ -54,9 +65,16 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
                 rel="noopener noreferrer"
                 id="hero-order-book-btn"
                 onClick={onOrderClick}
-                className="w-full min-h-[50px] font-button font-medium text-[12.5px] sm:text-[13px] text-white tracking-[0.2em] uppercase bg-transparent border border-white/90 rounded-none py-3.5 px-6 inline-flex items-center justify-center text-center transition-all duration-200 hover:bg-white hover:text-[#2C0A29] cursor-pointer shadow-md active:scale-[0.99]"
+                className="relative group overflow-hidden w-full min-h-[50px] sm:min-h-[52px] font-button font-bold text-[12.5px] sm:text-[13px] text-[#22051E] tracking-[0.18em] uppercase bg-gradient-to-r from-[#C59B3F] via-[#E8CB85] to-[#B88B32] hover:from-[#D4AF4A] hover:via-[#F0D695] hover:to-[#C6983A] border border-[#F5DC9E]/80 rounded-xl py-3.5 px-6 inline-flex items-center justify-center text-center transition-all duration-300 cursor-pointer shadow-[0_4px_22px_rgba(197,155,63,0.32)] hover:shadow-[0_6px_28px_rgba(212,175,55,0.45)] active:scale-[0.98]"
               >
-                QUERO O MEU EXEMPLAR
+                {/* Feixe de luz brilhando passando (Shimmer Premium) */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl" aria-hidden="true">
+                  <div className="absolute top-0 bottom-0 w-28 bg-gradient-to-r from-transparent via-white/65 to-transparent animate-shimmer-sweep" />
+                </div>
+
+                <span className="relative z-10 flex items-center justify-center">
+                  QUERO O MEU EXEMPLAR
+                </span>
               </a>
 
               {/* Linha discreta de segurança e transparência */}
@@ -88,3 +106,4 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
     </section>
   );
 };
+

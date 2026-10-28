@@ -32,9 +32,8 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
                       width="1400"
                       height="933"
                       className="w-full h-full object-cover select-none"
-                      loading="eager"
-                      decoding="sync"
-                      fetchPriority="high"
+                      loading="lazy"
+                      decoding="async"
                       referrerPolicy="no-referrer"
                     />
                   </picture>
@@ -53,8 +52,8 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
                         height="1800"
                         className="w-full h-full object-cover select-none"
                         referrerPolicy="no-referrer"
-                        loading="eager"
-                        decoding="sync"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </picture>
                   </div>
@@ -72,8 +71,8 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
                         height="800"
                         className="w-full h-full object-cover select-none"
                         referrerPolicy="no-referrer"
-                        loading="eager"
-                        decoding="sync"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </picture>
                   </div>
@@ -113,7 +112,7 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
           <div className="md:col-span-7 flex flex-col items-start text-left w-full order-2 md:order-2">
             
             {/* H2 Title */}
-            <h2 className="font-headline font-normal text-[#360A2F] text-[28px] sm:text-[36px] md:text-[42px] lg:text-[46px] leading-[1.18] tracking-tight mb-4 sm:mb-6 [text-wrap:balance] max-w-[620px]">
+            <h2 className="font-headline font-bold text-[#360A2F] text-[28px] sm:text-[36px] md:text-[42px] lg:text-[46px] leading-[1.18] tracking-tight mb-4 sm:mb-6 [text-wrap:balance] max-w-[620px]">
               Trabalhar Duro Não Basta Se o Dinheiro Não Tiver Rumo.
             </h2>
 

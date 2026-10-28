@@ -23,12 +23,13 @@ export const TradeTravelFooter: React.FC<TradeTravelFooterProps> = ({ onOrderCli
             onPreviewClick={onOrderClick} 
             imageSrc="/footer-mockup 3.png" 
             size="lg" 
+            loading="lazy"
           />
         </div>
 
         {/* Chamada Final Direta e Editorial */}
         <div className="space-y-3 max-w-[620px] mx-auto">
-          <h2 className="font-headline font-normal text-white text-[26px] sm:text-[32px] md:text-[36px] leading-[1.18] tracking-tight">
+          <h2 className="font-headline font-bold text-white text-[26px] sm:text-[32px] md:text-[36px] leading-[1.18] tracking-tight">
             O Teu Progresso Financeiro Começa na Decisão de Hoje.
           </h2>
           <p className="font-content font-normal text-[#F8F4EE]/85 text-[14.5px] sm:text-[15.5px] leading-[1.6] max-w-[540px] mx-auto">

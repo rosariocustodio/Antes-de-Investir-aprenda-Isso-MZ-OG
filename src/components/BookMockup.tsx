@@ -6,6 +6,7 @@ interface BookMockupProps {
   size?: 'sm' | 'md' | 'lg';
   imageSrc?: string;
   showBadge?: boolean;
+  loading?: 'eager' | 'lazy';
 }
 
 export const BookMockup: React.FC<BookMockupProps> = ({
@@ -13,10 +14,11 @@ export const BookMockup: React.FC<BookMockupProps> = ({
   className = '',
   size = 'lg',
   imageSrc = '/mockup principal.webp',
+  loading = 'eager',
 }) => {
   const sizeClasses = {
     sm: 'w-[160px] sm:w-[190px]',
-    md: 'w-[240px] sm:w-[270px]',
+    md: 'w-[75vw] max-w-[290px] xs:max-w-[320px] sm:max-w-[340px]',
     lg: 'w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px]',
   }[size];
 
@@ -35,9 +37,9 @@ export const BookMockup: React.FC<BookMockupProps> = ({
             alt="Antes de Investir, Aprenda Isto"
             width="1024"
             height="1536"
-            loading="eager"
-            decoding="sync"
-            fetchPriority="high"
+            loading={loading}
+            decoding="async"
+            fetchPriority={loading === 'eager' ? 'high' : 'auto'}
             className="w-full h-auto object-contain block select-none pointer-events-none drop-shadow-2xl"
             onError={(e) => {
               const target = e.currentTarget as HTMLImageElement;
