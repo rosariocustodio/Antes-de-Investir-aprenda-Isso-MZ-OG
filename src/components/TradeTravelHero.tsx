@@ -41,23 +41,12 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
             </h1>
 
             {/* Subtítulo com clareza e ritmo editorial */}
-            <p className="font-content text-[#F8F4EE]/85 font-normal text-[15px] sm:text-[16.5px] md:text-[17.5px] leading-[1.6] mb-6 sm:mb-8 max-w-[530px]">
+            <p className="font-content text-[#F8F4EE]/85 font-normal text-[15px] sm:text-[16.5px] md:text-[17.5px] leading-[1.6] mb-7 sm:mb-8 max-w-[530px]">
               O guia prático para proteger o dinheiro que já tem, e aprender a fazê-lo crescer —{' '}
               <span className="text-white font-medium">antes de dar o próximo passo.</span>
             </p>
 
-            {/* Mockup no Mobile (posicionado harmonicamente com escala premium) */}
-            <div className="md:hidden w-full flex justify-center py-2 mb-6">
-              <div className="w-full max-w-[300px] sm:max-w-[330px]">
-                <BookMockup 
-                  onPreviewClick={onPreviewClick} 
-                  imageSrc="/mockup principal.webp" 
-                  size="md" 
-                />
-              </div>
-            </div>
-
-            {/* Bloco de CTA e Garantias */}
+            {/* Bloco de CTA e Garantias (agora imediatamente visível no ecrã inicial do telemóvel) */}
             <div className="w-full max-w-[340px] flex flex-col items-center md:items-start">
               <a
                 href={CHECKOUT_URL}
@@ -70,7 +59,7 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
                 QUERO O MEU EXEMPLAR
               </a>
 
-              {/* Linha discreta de segurança e transparência (sóbria, sem ícones coloridos) */}
+              {/* Linha discreta de segurança e transparência */}
               <div className="w-full flex items-center justify-center md:justify-start gap-2 text-[10.5px] sm:text-[11px] text-white/60 font-content mt-3.5 select-none tracking-normal">
                 <span>Pagamento seguro</span>
                 <span className="text-white/30">•</span>
@@ -82,7 +71,7 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
 
           </div>
 
-          {/* Coluna do Mockup no Desktop (PC - Escala Premium) */}
+          {/* Coluna do Mockup no Desktop */}
           <div className="hidden md:flex md:col-span-5 justify-center items-center w-full pl-2 lg:pl-6">
             <div className="w-full max-w-[400px] lg:max-w-[440px] xl:max-w-[470px] flex justify-center">
               <BookMockup 
@@ -99,4 +88,3 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
     </section>
   );
 };
-
