@@ -8,6 +8,7 @@ export interface CtaButtonProps {
   onClick?: (e?: React.MouseEvent) => void;
   className?: string;
   children?: React.ReactNode;
+  text?: string;
   id?: string;
 }
 
@@ -18,6 +19,7 @@ export const CtaButton: React.FC<CtaButtonProps> = ({
   onClick,
   className = '',
   children,
+  text,
   id,
 }) => {
   const isDarkSection = variant === 'dark-section';
@@ -51,7 +53,7 @@ export const CtaButton: React.FC<CtaButtonProps> = ({
       </div>
 
       <span className="relative z-10 flex items-center justify-center whitespace-nowrap">
-        {children || 'QUERO O MEU EXEMPLAR'}
+        {text || children || 'QUERO O MEU GUIA DIGITAL'}
       </span>
     </a>
   );

@@ -58,32 +58,33 @@ export const AuthorStorySection: React.FC<AuthorStorySectionProps> = ({ onOrderC
           </div>
         </div>
 
-        {/* Story Text matching Screenshot 4 & 5 word for word */}
+        {/* Story Text */}
         <div className="space-y-4 text-[#242B2E] font-content text-[15px] sm:text-[16px] leading-[1.7] max-w-[620px] mx-auto pt-2">
           <p>
-            Durante anos, acompanhei de perto uma realidade dolorosa em Moçambique: trabalhadores dedicados e famílias esforçadas que passam o mês a produzir, apenas para ver o salário desaparecer antes do dia 20.
+            Durante anos, acompanhei de perto uma realidade preocupante em Moçambique: pessoas trabalhadoras que, na vontade legítima de fazer o dinheiro render, colocam as suas poupanças em negócios desconhecidos ou esquemas arriscados e acabam por perder tudo.
           </p>
 
           <p>
-            A verdade é que ninguém nos ensina nas escolas o essencial sobre o dinheiro: como proteger os rendimentos contra imprevistos, estancar perdas invisíveis e investir com segurança através dos canais formais e regulados da nossa economia.
+            A verdade é que ninguém nos ensina o essencial antes de começarmos a investir: como distinguir oportunidades reais de armadilhas, como analisar os riscos e que passos dar antes de colocar o primeiro Metical em jogo.
           </p>
 
           <p>
-            Por isso fundei a <strong>Rumos Seguros</strong>. Criei um método 100% prático, realista e desenhado para a realidade moçambicana, para que nenhum trabalhador volte a perder a tranquilidade por falta de orientação financeira.
+            Por isso escrevi <strong>Antes de Investir, Aprenda Isto</strong> e criei a <strong>Rumos Seguros</strong>. Um guia simples, 100% focado na nossa realidade, para que qualquer pessoa consiga compreender os fundamentos e tomar decisões conscientes e informadas.
           </p>
 
-          {/* Standout Quote Box matching Screenshot 5 */}
+          {/* Standout Quote Box */}
           <div className="my-6 p-5 sm:p-6 bg-[#F5ECE8] border-l-2 border-[#360A2F]">
             <p className="font-headline italic text-[16px] sm:text-[17px] text-[#2C0A29] leading-relaxed">
-              "Este livro é o mapa prático que eu gostaria de ter recebido: direto ao ponto, sem promessas ilusórias, feito para devolver a sua paz e liberdade de escolha."
+              "Este guia digital é a conversa clara e sincera que todos deveriam ter antes de investir: direto ao ponto, sem promessas ilusórias e feito para proteger o teu esforço."
             </p>
           </div>
 
-          {/* Button matching Screenshot 5 */}
+          {/* Button */}
           <div className="w-full flex justify-center pt-2 pb-4">
             <CtaButton
               variant="light-section"
               size="md"
+              text="QUERO O MEU GUIA DIGITAL"
               onClick={onOrderClick}
               className="w-full max-w-[340px]"
             />

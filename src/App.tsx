@@ -33,10 +33,10 @@ export const App: React.FC = () => {
   // Proteção contra screenshot, cópia, corte, clique direito e atalhos de inspeção/DevTools
   useEffect(() => {
     const triggerScreenshotBlock = () => {
-      // 1. Limpa a área de transferência para que a captura de tela fique vazia
+      // 1. Limpa a área de transferência para que a captura de tela fique vazia (apenas se tiver foco)
       try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText('');
+        if (typeof document !== 'undefined' && document.hasFocus() && navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText('').catch(() => {});
         }
       } catch (err) {}
 
@@ -167,8 +167,8 @@ export const App: React.FC = () => {
     const handleBlur = () => {
       // Quando a janela perde foco por ferramenta externa de captura de ecrã
       try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText('');
+        if (typeof document !== 'undefined' && document.hasFocus() && navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText('').catch(() => {});
         }
       } catch (err) {}
     };

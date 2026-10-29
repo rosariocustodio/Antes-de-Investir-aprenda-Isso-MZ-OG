@@ -1,4 +1,5 @@
 import React from 'react';
+import { ShieldCheck, Zap } from 'lucide-react';
 import { BookMockup } from './BookMockup';
 import { RumosSegurosLogo } from './RumosSegurosLogo';
 import { CtaButton } from './CtaButton';
@@ -38,21 +39,24 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
           {/* Coluna de Texto e Ação */}
           <div className="md:col-span-7 text-center md:text-left flex flex-col items-center md:items-start">
 
-            {/* Título Principal H1 - Opção 3 com tipografia impactante, profissional e de fácil leitura */}
+            {/* Eyebrow badge oficial */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 text-[11px] sm:text-xs font-content font-medium tracking-wide uppercase text-white/90 mb-3.5 sm:mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              <span>+1.700 pessoas preparadas</span>
+            </div>
+
+            {/* Título Principal H1 - Alinhado com a promessa real do e-book */}
             <h1 className="font-headline font-bold text-white text-[28px] xs:text-[32px] sm:text-[38px] md:text-[44px] lg:text-[48px] leading-[1.18] sm:leading-[1.14] tracking-[-0.02em] mb-4 sm:mb-5 max-w-[640px]">
-              O seu salário deve construir o seu futuro — <br className="hidden sm:inline" />
-              <span className="text-white">não apenas pagar contas do mês.</span>
+              Antes de investir, <br className="hidden sm:inline" />
+              <span className="text-white">há coisas que precisas de saber.</span>
             </h1>
 
-            {/* Subtítulo adaptado - Opção 5: conciso, nítido e em tamanho reduzido para não poluir */}
-            <p className="font-content text-[#F8F4EE]/90 font-normal text-[13.5px] xs:text-[14px] sm:text-[15px] md:text-[15.5px] leading-[1.55] sm:leading-[1.6] mb-5 sm:mb-6 md:mb-8 max-w-[520px]">
-              Pare de trabalhar apenas para pagar contas.{' '}
-              <span className="text-white font-medium">
-                Tenha um plano simples e comprovado para ver o seu dinheiro crescer de verdade.
-              </span>
+            {/* Subtítulo adaptado - Claro, direto e educativo */}
+            <p className="font-content text-[#F8F4EE]/90 font-normal text-[14px] sm:text-[15.5px] md:text-[16px] leading-[1.6] mb-5 sm:mb-6 md:mb-8 max-w-[540px]">
+              Descobre os fundamentos dos investimentos, compreende os riscos reais e aprende o que deves analisar antes de tomar decisões com o teu dinheiro.
             </p>
 
-            {/* Mockup do Livro no Mobile (estilo original book.tradeandtravel.com) */}
+            {/* Mockup do Livro no Mobile */}
             <div className="md:hidden w-full flex justify-center my-4 sm:my-6">
               <BookMockup 
                 onPreviewClick={onPreviewClick} 
@@ -62,22 +66,27 @@ export const TradeTravelHero: React.FC<TradeTravelHeroProps> = ({
             </div>
 
             {/* Bloco de CTA e Garantias */}
-            <div className="w-full max-w-[340px] flex flex-col items-center md:items-start">
+            <div className="w-full max-w-[360px] sm:max-w-[380px] flex flex-col items-center md:items-start">
               <CtaButton
                 id="hero-order-book-btn"
                 variant="dark-section"
                 size="lg"
+                text="QUERO O MEU GUIA DIGITAL"
                 onClick={onOrderClick}
                 className="w-full"
               />
 
-              {/* Linha discreta de segurança e transparência */}
-              <div className="w-full flex items-center justify-center md:justify-start gap-2 text-[10.5px] sm:text-[11px] text-white/60 font-content mt-3.5 select-none tracking-normal">
-                <span>Pagamento seguro</span>
+              {/* Linha de segurança e garantias sem termos técnicos ou preços desnecessários */}
+              <div className="w-full flex items-center justify-center md:justify-start flex-wrap gap-x-3 gap-y-1.5 text-[11.5px] sm:text-xs text-white/85 font-content mt-3.5 select-none tracking-normal">
+                <span className="inline-flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Pagamento 100% Seguro</span>
+                </span>
                 <span className="text-white/30">•</span>
-                <span>Acesso imediato</span>
-                <span className="text-white/30">•</span>
-                <span>Suporte directo</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Acesso Imediato</span>
+                </span>
               </div>
             </div>
 

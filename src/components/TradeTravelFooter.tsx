@@ -31,13 +31,13 @@ export const TradeTravelFooter: React.FC<TradeTravelFooterProps> = ({ onOrderCli
           />
         </div>
 
-        {/* Chamada Final Direta e Editorial */}
+        {/* Chamada Final Direta e Educativa */}
         <div className="space-y-3 max-w-[620px] mx-auto">
           <h2 className="font-headline font-bold text-white text-[26px] sm:text-[32px] md:text-[36px] leading-[1.18] tracking-tight">
-            O Teu Progresso Financeiro Começa na Decisão de Hoje.
+            Antes de Dar o Próximo Passo, Aprende o Que Importa.
           </h2>
           <p className="font-content font-normal text-[#F8F4EE]/85 text-[14.5px] sm:text-[15.5px] leading-[1.6] max-w-[540px] mx-auto">
-            Garanta o seu exemplar e assuma o controlo do seu património com método, clareza e tranquilidade.
+            Garante o teu guia digital e constrói uma base sólida para investir com segurança, discernimento e consciência em Moçambique.
           </p>
         </div>
 
@@ -46,12 +46,13 @@ export const TradeTravelFooter: React.FC<TradeTravelFooterProps> = ({ onOrderCli
           <CtaButton
             variant="dark-section"
             size="lg"
+            text="QUERO O MEU GUIA DIGITAL"
             onClick={onOrderClick}
             className="w-full max-w-[340px]"
           />
 
           <p className="font-content font-medium text-[11px] text-[#F8F4EE]/65 tracking-[0.2em] uppercase select-none">
-            EDIÇÃO OFICIAL • DISPONÍVEL EM MOÇAMBIQUE
+            ACESSO IMEDIATO EM PDF • APENAS 299 MT
           </p>
         </div>
 

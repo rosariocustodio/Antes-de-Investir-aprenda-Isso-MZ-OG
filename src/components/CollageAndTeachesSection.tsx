@@ -117,47 +117,47 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
             
             {/* H2 Title */}
             <h2 className="font-headline font-bold text-[#360A2F] text-[28px] sm:text-[36px] md:text-[42px] lg:text-[46px] leading-[1.18] tracking-tight mb-4 sm:mb-6 [text-wrap:balance] max-w-[620px]">
-              Trabalhar Duro Não Basta Se o Dinheiro Não Tiver Rumo.
+              O Que Precisas de Saber Antes de Colocar o Teu Dinheiro em Risco
             </h2>
 
             {/* Introductory Paragraph */}
             <p className="font-content font-normal text-[#242B2E]/90 text-[14.5px] sm:text-[16px] md:text-[17px] leading-[1.65] mb-5 sm:mb-6 max-w-[600px]">
-              Trabalha arduamente todos os meses e cumpre os seus compromissos. Mas se o salário parasse hoje, por quanto tempo estaria seguro? O verdadeiro progresso financeiro não deve custar a sua paz de espírito.
+              Muitas pessoas começam a investir atraídas pela promessa de ganhos rápidos, sem compreender como os instrumentos funcionam nem como proteger o capital que tanto lhes custou a ganhar. Este guia foi criado para te dar a base educativa essencial antes de dares o primeiro passo.
             </p>
 
             {/* Sub-heading */}
             <h3 className="font-content font-semibold text-[11.5px] sm:text-[12.5px] tracking-[0.2em] uppercase text-[#360A2F] mb-3.5">
-              O QUE O MÉTODO ENSINA A ESTANCAR E CONSTRUIR:
+              O QUE O GUIA ENSINA ANTES DE INVESTIR:
             </h3>
 
-            {/* Fused Cohesive Points */}
+            {/* Fused Cohesive Educational Points */}
             <div className="space-y-3 mb-6 w-full max-w-[600px]">
               
               <div className="border-b border-[#360A2F]/15 pb-3 flex items-start gap-3">
                 <span className="font-headline text-[18px] text-[#360A2F] shrink-0 leading-none mt-0.5">•</span>
                 <p className="font-content text-[14px] sm:text-[15.5px] text-[#242B2E] leading-relaxed">
-                  <strong>Criar reserva real de emergência:</strong> Deixar de viver vulnerável antes do dia 20 e calcular o valor exato para blindar a sua família em momentos difíceis.
+                  <strong>Diferença entre poupar e investir:</strong> Entender quando é hora de guardar para segurança e quando faz sentido alocar capital para rendimento, sem arriscar o dinheiro do dia a dia.
                 </p>
               </div>
 
               <div className="border-b border-[#360A2F]/15 pb-3 flex items-start gap-3">
                 <span className="font-headline text-[18px] text-[#360A2F] shrink-0 leading-none mt-0.5">•</span>
                 <p className="font-content text-[14px] sm:text-[15.5px] text-[#242B2E] leading-relaxed">
-                  <strong>Redefinir o risco e evitar armadilhas:</strong> Dominar um filtro técnico rigoroso para avaliar oportunidades e dizer não a esquemas com falsas promessas de lucro fácil.
+                  <strong>Compreensão real do risco e filtros práticos:</strong> Como avaliar qualquer proposta que recebas e saber identificar esquemas ou promessas irreais de retorno fácil.
                 </p>
               </div>
 
               <div className="border-b border-[#360A2F]/15 pb-3 flex items-start gap-3">
                 <span className="font-headline text-[18px] text-[#360A2F] shrink-0 leading-none mt-0.5">•</span>
                 <p className="font-content text-[14px] sm:text-[15.5px] text-[#242B2E] leading-relaxed">
-                  <strong>Organizar e separar contas com clareza:</strong> Aplicar a regra 50-30-20 na prática e distinguir com firmeza o rendimento pessoal, despesas essenciais e capital de poupança.
+                  <strong>O que analisar antes de escolher opções formais:</strong> Compreender prazos, taxas, liquidez e o funcionamento básico dos instrumentos financeiros regulados em Moçambique.
                 </p>
               </div>
 
               <div className="border-b border-[#360A2F]/15 pb-3 flex items-start gap-3">
                 <span className="font-headline text-[18px] text-[#360A2F] shrink-0 leading-none mt-0.5">•</span>
                 <p className="font-content text-[14px] sm:text-[15.5px] text-[#242B2E] leading-relaxed">
-                  <strong>Investir com método e liberdade de escolha:</strong> Superar o medo paralisante e começar com quantias modestas em instrumentos formais e seguros de Moçambique, sem perder valor para a inflação.
+                  <strong>Preparação para decisões informadas:</strong> Desenvolver autonomia para não depender de boatos nem de conselhos desinformados na gestão do teu património.
                 </p>
               </div>
 
@@ -165,7 +165,7 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
 
             {/* Standout Quote */}
             <p className="font-content text-[14px] sm:text-[15.5px] text-[#242B2E]/80 italic mb-6 leading-relaxed max-w-[580px]">
-              Tem todo o direito de desejar mais do que apenas pagar contas no fim do mês. Organizar o que já tem em mãos é o primeiro passo para a verdadeira tranquilidade.
+              "Investir sem compreender os fundamentos é assumir riscos desnecessários. Aprender antes de agir é o passo mais seguro para proteger o teu futuro financeiro."
             </p>
 
             {/* Action Button */}
@@ -174,6 +174,7 @@ export const CollageAndTeachesSection: React.FC<CollageAndTeachesSectionProps> =
                 <CtaButton
                   variant="light-section"
                   size="md"
+                  text="QUERO O MEU GUIA DIGITAL"
                   onClick={onOrderClick}
                   className="w-full max-w-[320px] sm:w-auto"
                 />

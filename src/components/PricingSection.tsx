@@ -72,15 +72,36 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOrderClick }) 
             Por apenas 299 MT
           </div>
 
-          {/* Linha informativa exata da Screenshot 6 */}
-          <p className="font-content text-[12px] sm:text-[13px] text-[#242B2E]/75 tracking-wide mb-6">
+          {/* Linha informativa */}
+          <p className="font-content text-[12px] sm:text-[13px] text-[#242B2E]/75 tracking-wide mb-5">
             Oferta de lançamento — o valor sobe em breve
           </p>
+
+          {/* O que está incluído */}
+          <div className="w-full border-t border-b border-[#360A2F]/15 py-3.5 my-1 mb-5 text-left space-y-2 text-[12.5px] sm:text-[13px] text-[#242B2E]/85 font-content">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#360A2F]"></span>
+              <span>Guia digital completo em PDF (30 capítulos práticos)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#360A2F]"></span>
+              <span>Leitura imediata no telemóvel, tablet ou computador</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#360A2F]"></span>
+              <span>Pagamento simples por M-Pesa, e-Mola ou Cartão</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#360A2F]"></span>
+              <span>Garantia total de 7 dias com devolução a 100%</span>
+            </div>
+          </div>
 
           {/* Botão de ação com tracking do checkout */}
           <CtaButton
             variant="light-section"
             size="md"
+            text="QUERO O MEU GUIA DIGITAL"
             onClick={onOrderClick}
             className="w-full max-w-[320px]"
           />
